@@ -1,0 +1,15 @@
+---
+name: Version
+'on':
+  workflow_call:
+
+jobs:
+  version:
+    name: Version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+      - name: Echo version
+        run: |
+          echo "version"

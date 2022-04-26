@@ -1,0 +1,11 @@
+---
+name: CI
+'on':
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  yaml-lint-job:
+    uses: GrabAByte/github-devops-workflows/.github/workflows/yaml-workflow.yml@feat/scaffolding

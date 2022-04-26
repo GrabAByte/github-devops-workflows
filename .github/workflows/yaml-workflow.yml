@@ -1,0 +1,13 @@
+---
+name: YAML workflow
+'on':
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  yaml-lint:
+    uses: ./.github/workflows/yamlLint-job.yml
+  version:
+    uses: ./.github/workflows/version-job.yml
