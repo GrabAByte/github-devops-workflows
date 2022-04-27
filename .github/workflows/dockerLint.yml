@@ -1,11 +1,7 @@
 ---
-name: YAML Linter
-
+name: Docker workflow
 'on':
-  pull_request:
-  push:
-    branches:
-      - main
+  workflow_call:
 
 jobs:
   lint:
@@ -17,4 +13,4 @@ jobs:
 
       - name: Lint code
         run: |
-          docker run --rm -i -v ${PWD}/.hadolint.yml:/.hadolint.yml hadolint/hadolint < docker/Dockerfile
+          echo "I will Lint."
