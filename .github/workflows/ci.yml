@@ -8,4 +8,4 @@ name: CI
 
 jobs:
   yaml-workflow:
-    uses: GrabAByte/github-devops-workflows/.github/workflows/yaml-workflow.yml@feat/scaffolding
+    uses: GrabAByte/github-devops-workflows/.github/workflows/yaml-workflow.yml@main
