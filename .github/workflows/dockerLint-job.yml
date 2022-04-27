@@ -11,14 +11,6 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
 
-      - name: Set up Python 3
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Install Linting Dependencies
-        run: pip3 install yamllint
-
       - name: Lint code
         run: |
-          yamllint .
+          docker run --rm -i -v ${PWD}/.hadolint.yml:/.hadolint.yml hadolint/hadolint < docker/Dockerfile
