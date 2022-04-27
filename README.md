@@ -6,8 +6,7 @@ A central repository containing all CI CD Workflows to be used in Github across 
 
 * `metadata.json` contains the project name and version
 * `docs/*.md` contains any additional documentation
-* `.github/workflows/*-workflow.yml` contains the full CI / CD workflows for various technologies.
-* `.github/workflows/*-job.yml` contains the individual jobs that those workflows will use.
+* `.github/workflows/*.yml` contains workflow jobs that will be encapsulator into an overall workflow by the calling repository.
 
 ## Requirements
 
