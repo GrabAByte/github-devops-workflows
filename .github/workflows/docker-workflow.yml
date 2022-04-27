@@ -4,5 +4,14 @@ name: Docker workflow
   workflow_call:
 
 jobs:
-  docker-lint:
-    uses: ./.github/workflows/dockerLint-job.yml
+  lint:
+  name: Lint
+  runs-on: ubuntu-latest
+  steps:
+    - name: Check out the codebase.
+      uses: actions/checkout@v2
+
+    - name: Lint code
+      run: |
+        docker run --rm -i -v ${PWD}/.hadolint.yml:/.hadolint.yml hadolint/hadolint < docker/Dockerfile
+
