@@ -1,10 +1,7 @@
 ---
 name: Docker workflow
 'on':
-  pull_request:
-  push:
-    branches:
-      - main
+  workflow_call:
 
 jobs:
   docker-lint:
