@@ -7,5 +7,5 @@ name: CI
       - main
 
 jobs:
-  yaml-workflow:
+  yaml-lint:
     uses: GrabAByte/github-devops-workflows/.github/workflows/yamlLint.yml@feat/ci
