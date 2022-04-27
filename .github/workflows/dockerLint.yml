@@ -1,0 +1,16 @@
+---
+name: Docker workflow
+'on':
+  workflow_call:
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Lint code
+        run: |
+          echo "I will Lint."

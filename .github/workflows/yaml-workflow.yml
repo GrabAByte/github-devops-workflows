@@ -1,4 +1,5 @@
 ---
+# TODO: This structure needs to be migration to the local ci.yml file in this repository
 name: YAML workflow
 'on':
   pull_request:

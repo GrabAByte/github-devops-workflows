@@ -1,0 +1,16 @@
+---
+name: Docker Build
+'on':
+  workflow_call:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Build Code
+        run: |
+          echo "I will build."
