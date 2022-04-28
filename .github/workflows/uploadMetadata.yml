@@ -17,7 +17,9 @@ jobs:
     steps:
       - name: Output metadata to artifact
         run: |
-          if [ ! -d ${{ inputs.path }} ]; then mkdir ${{ inputs.path }}; di
+          if [ ! -d ${{ inputs.path }} ]; then
+            mkdir ${{ inputs.path }}
+          fi
           echo "name=foo" >> ${{ inputs.path }}/${{ inputs.artifact }}
           echo "version=0.0.0" >> ${{ inputs.path }}/${{ inputs.artifact }}
       - name: Upload Artifact
