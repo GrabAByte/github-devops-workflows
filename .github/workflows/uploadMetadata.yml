@@ -1,0 +1,19 @@
+---
+name: Upload Metadata
+'on':
+  workflow_call:
+
+job:
+  metadata:
+    name: Upload Metadata
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        run: |
+          if [ ! -d .artifacts ]; then mkdir .artifacts; di
+          echo "name=foo" >> .artifacts/metadata.sh
+          echo "version=0.0.0" >> .artifacts/metadata.sh
+      - uses: GrabAByte/github-devops-workflows/.github/workflows/uploadArtifact.yml@feat/inputs
+        with:
+          artifact: metadata.sh
+          path: metadata

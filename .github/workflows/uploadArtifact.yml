@@ -1,0 +1,21 @@
+---
+name: Upload Artifact
+'on':
+  workflow_call:
+    inputs:
+      artifact:
+        required: true
+        type: string
+      path:
+        require: true
+        type: string
+
+job:
+  downloadArtifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ inputs.artifact }}
+          path: ${{ inputs.path }}
