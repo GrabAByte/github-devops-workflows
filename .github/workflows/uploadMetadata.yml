@@ -20,8 +20,7 @@ jobs:
           if [ ! -d ${{ inputs.path }} ]; then
             mkdir ${{ inputs.path }}
           fi
-          echo "name=foo" >> ${{ inputs.path }}/${{ inputs.artifact }}
-          echo "version=0.0.0" >> ${{ inputs.path }}/${{ inputs.artifact }}
+          sed -i 's/0.0.0/0.0.1/' ${{ inputs.path }}/${{ inputs.artifact }}
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
