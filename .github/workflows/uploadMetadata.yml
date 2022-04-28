@@ -5,7 +5,7 @@ name: Upload Metadata
 
 job:
   metadata:
-    name: Gather Metadata
+    name: Metadata
     runs-on: ubuntu-latest
     steps:
       - name: Output metadata to artifact
