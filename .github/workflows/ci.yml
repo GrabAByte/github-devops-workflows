@@ -8,4 +8,4 @@ name: CI
 
 jobs:
   yaml-lint:
-    uses: GrabAByte/github-devops-workflows/.github/workflows/yamlLint.yml@feat/ci
+    uses: GrabAByte/github-devops-workflows/.github/workflows/yamlLint.yml@main
