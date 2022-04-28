@@ -14,9 +14,9 @@ jobs:
       - name: Download file
         uses: actions/download-artifact@v1
         with:
-          name: metadata-${{ GITHUB_RUN_ID }}.sh
+          name: metadata.sh
           path: metadata
 
       - name: Display Metadata
         run: |
-          cat metadata/metadata-${{ GITHUB_RUN_ID }}.sh
+          cat metadata/metadata.sh

@@ -20,7 +20,6 @@ jobs:
 
       - name: Bump Artifact Version
         run: |
-          echo $GITHUB_HEAD_REF
           case ${{ inputs.metadataFile }} in
             *.yml|*.yaml)
               if [ $GITHUB_REF_NAME = main ]; then
@@ -41,12 +40,12 @@ jobs:
           projectName=$(grep name ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')
 
           mkdir metadata
-          echo "projectName=${projectName}" >> metadata/metadata-$$GITHUB_RUN_ID.sh
-          echo "projectVersion=${projectVersion}" >> metadata/metadata-$$GITHUB_RUN_ID.sh
+          echo "projectName=${projectName}" >> metadata/metadata.sh
+          echo "projectVersion=${projectVersion}" >> metadata/metadata.sh
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: metadata-${{ GITHUB_RUN_ID }}.sh
+          name: metadata.sh
           path: metadata
           retention-days: 1
