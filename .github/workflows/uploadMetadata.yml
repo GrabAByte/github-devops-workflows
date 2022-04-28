@@ -2,6 +2,13 @@
 name: Upload Metadata
 'on':
   workflow_call:
+    inputs:
+      artifact:
+        required: true
+        type: string
+      path:
+        require: true
+        type: string
 
 jobs:
   metadata:
@@ -10,11 +17,11 @@ jobs:
     steps:
       - name: Output metadata to artifact
         run: |
-          if [ ! -d .artifacts ]; then mkdir .artifacts; di
-          echo "name=foo" >> .artifacts/metadata.sh
-          echo "version=0.0.0" >> .artifacts/metadata.sh
-  upload:
-    uses: GrabAByte/github-devops-workflows/.github/workflows/uploadArtifact.yml@feat/shareVars
-    with:
-      artifact: metadata.sh
-      path: metadata
+          if [ ! -d ${{ inputs.path }} ]; then mkdir ${{ inputs.path }}; di
+          echo "name=foo" >> ${{ inputs.path }}/${{ inputs.artifact }}
+          echo "version=0.0.0" >> ${{ inputs.path }}/${{ inputs.artifact }}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ inputs.artifact }}
+          path: ${{ inputs.path }}
