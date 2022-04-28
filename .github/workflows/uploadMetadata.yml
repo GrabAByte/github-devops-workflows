@@ -27,3 +27,4 @@ jobs:
         with:
           name: ${{ inputs.artifact }}
           path: ${{ inputs.path }}
+          retention-days: 1
