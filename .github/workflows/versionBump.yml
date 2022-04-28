@@ -1,5 +1,5 @@
 ---
-name: Upload Metadata
+name: Version Bump
 'on':
   workflow_call:
     inputs:
@@ -11,15 +11,16 @@ name: Upload Metadata
         type: string
 
 jobs:
-  metadata:
-    name: Gather Metadata
+  version:
+    name: Bump Version
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
 
-      - name: Output metadata to artifact
+      - name: Bump Artifact Version
         run: |
+          ## This code block will contain the logic to Bump metadata on CHANGELOG based on the branch naming convention
           sed -i 's/0.0.0/0.0.1/' ${{ inputs.path }}/${{ inputs.artifact }}
 
       - name: Upload Artifact
