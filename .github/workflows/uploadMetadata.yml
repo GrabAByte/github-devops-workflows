@@ -5,7 +5,7 @@ name: Upload Metadata
 
 jobs:
   metadata:
-    name: Metadata
+    name: Gather Metadata
     runs-on: ubuntu-latest
     steps:
       - name: Output metadata to artifact
@@ -13,8 +13,8 @@ jobs:
           if [ ! -d .artifacts ]; then mkdir .artifacts; di
           echo "name=foo" >> .artifacts/metadata.sh
           echo "version=0.0.0" >> .artifacts/metadata.sh
-      - name: Upload Metadata
-        uses: GrabAByte/github-devops-workflows/.github/workflows/uploadArtifact.yml@feat/shareVars
-        with:
-          artifact: metadata.sh
+  upload:
+    uses: GrabAByte/github-devops-workflows/.github/workflows/uploadArtifact.yml@feat/shareVars
+    with:
+      artifact: metadata.sh
           path: metadata
