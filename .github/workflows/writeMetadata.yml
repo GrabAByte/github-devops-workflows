@@ -47,6 +47,6 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: metadata-$$GITHUB_RUN_ID.sh
+          name: metadata-${{ GITHUB_RUN_ID }}.sh
           path: metadata
           retention-days: 1

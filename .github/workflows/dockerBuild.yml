@@ -18,10 +18,10 @@ jobs:
       - name: Download file
         uses: actions/download-artifact@v1
         with:
-          name: metadata-$GITHUB_RUN_ID.sh
+          name: metadata-${{ GITHUB_RUN_ID }}.sh
           path: metadata
 
       - name: Build Image
         run: |
-          source metadata/metadata-$GITHUB_RUN_ID.sh
+          source metadata/metadata-${{ GITHUB_RUN_ID }}.sh
           docker build -t="${GITHUB_REPOSITORY_OWNER,,}/$projectName:$projectVersion" -f ${{ inputs.dockerfilePath }} .
