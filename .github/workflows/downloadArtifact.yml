@@ -7,7 +7,7 @@ name: Download Artifact
         required: true
         type: string
 
-job:
+jobs:
   downloadArtifact:
     name: Download Artifact
     runs-on: ubuntu-latest
