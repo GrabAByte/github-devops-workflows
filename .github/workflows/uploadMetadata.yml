@@ -5,15 +5,16 @@ name: Upload Metadata
 
 job:
   metadata:
-    name: Upload Metadata
+    name: Gather Metadata
     runs-on: ubuntu-latest
     steps:
-      - shell: bash
+      - name: Output metadata to artifact
         run: |
           if [ ! -d .artifacts ]; then mkdir .artifacts; di
           echo "name=foo" >> .artifacts/metadata.sh
           echo "version=0.0.0" >> .artifacts/metadata.sh
-      - uses: GrabAByte/github-devops-workflows/.github/workflows/uploadArtifact.yml@feat/inputs
-        with:
-          artifact: metadata.sh
-          path: metadata
+      - name: Upload Metadata
+        uses: GrabAByte/github-devops-workflows/.github/workflows/uploadArtifact.yml@feat/inputs
+          with:
+            artifact: metadata.sh
+            path: metadata
