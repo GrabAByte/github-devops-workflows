@@ -14,11 +14,11 @@ name: Docker Build
         type: string
 
 jobs:
-  read-metadata:
-    name: Read Metadata
+  docker-build:
+    name: Build Docker Image
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the codebase.
+      - name: Check out the codebase
         uses: actions/checkout@v2
 
       - name: Download file
@@ -32,13 +32,6 @@ jobs:
           source ${{ inputs.outputPath }}/${{ inputs.outputFile }}
           echo $projectName
           echo $projectVersion
-
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v2
 
       - name: Build Code
         run: |
