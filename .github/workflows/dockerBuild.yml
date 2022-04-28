@@ -6,7 +6,7 @@ name: Docker Build
       dockerfilePath:
         required: true
         type: string
-       outputFile:
+      outputFile:
         required: true
         type: string
       outputPath:
