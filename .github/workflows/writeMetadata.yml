@@ -3,16 +3,10 @@ name: Write Metadata
 'on':
   workflow_call:
     inputs:
-      inputFile:
+      metadataFile:
         required: true
         type: string
-      inputPath:
-        required: true
-        type: string
-      outputFile:
-        required: true
-        type: string
-      outputPath:
+      metadataPath:
         required: true
         type: string
 
@@ -27,35 +21,32 @@ jobs:
       - name: Bump Artifact Version
         run: |
           echo $GITHUB_HEAD_REF
-          case ${{ inputs.inputFile }} in
+          case ${{ inputs.metadataFile }} in
             *.yml|*.yaml)
               if [ $GITHUB_REF_NAME = main ]; then
-                projectVersion=$(grep -w version ${{ inputs.inputPath }}/${{ inputs.inputFile }} | cut -d ':' -f2 | tr -d ' ",')
+                projectVersion=$(grep -w version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')
                 echo "projectVersion=${projectVersion}"
               else
-                projectVersion=$(grep -w version ${{ inputs.inputPath }}/${{ inputs.inputFile }} | cut -d ':' -f2 | tr -d ' ",')-$GITHUB_RUN_ID
+                projectVersion=$(grep -w version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')-$GITHUB_RUN_ID
               fi
             ;;
             *.json)
               if [ $GITHUB_REF_NAME = main ]; then
-                projectVersion=$(grep version ${{ inputs.inputPath }}/${{ inputs.inputFile }} | cut -d ':' -f2 | tr -d ' ",')
+                projectVersion=$(grep version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')
               else
-                projectVersion=$(grep version ${{ inputs.inputPath }}/${{ inputs.inputFile }} | cut -d ':' -f2 | tr -d ' ",')-$GITHUB_RUN_ID
+                projectVersion=$(grep version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')-$GITHUB_RUN_ID
               fi
             ;;
           esac
-          projectName=$(grep name ${{ inputs.inputPath }}/${{ inputs.inputFile }} | cut -d ':' -f2 | tr -d ' ",')
+          projectName=$(grep name ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')
 
-          if [ ! -d ${{ inputs.outputPath }} ]; then
-            mkdir ${{ inputs.outputPath }}
-          fi
-
-          echo "projectName=${projectName}" >> ${{ inputs.outputPath }}/${{ inputs.outputFile }}
-          echo "projectVersion=${projectVersion}" >> ${{ inputs.outputPath }}/${{ inputs.outputFile }}
+          mkdir metadata
+          echo "projectName=${projectName}" >> metadata/metadata-$$GITHUB_RUN_ID.sh
+          echo "projectVersion=${projectVersion}" >> metadata/metadata-$$GITHUB_RUN_ID.sh
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ inputs.outputFile }}
-          path: ${{ inputs.outputPath }}
+          name: metadata-$$GITHUB_RUN_ID.sh
+          path: metadata
           retention-days: 1
