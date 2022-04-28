@@ -3,7 +3,7 @@ name: Upload Metadata
 'on':
   workflow_call:
 
-job:
+jobs:
   metadata:
     name: Metadata
     runs-on: ubuntu-latest
