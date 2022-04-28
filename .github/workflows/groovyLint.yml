@@ -2,6 +2,10 @@
 name: Groovy Linter
 'on':
   workflow_call:
+    inputs:
+      groovyPath:
+        required: true
+        type: string
 
 jobs:
   lint:
@@ -22,5 +26,5 @@ jobs:
       - name: Lint code
         run: |
           npm-groovy-lint \
-            --path . \
+            --path ${{ inputs.groovyPath }} \
             --files "**/*.groovy"

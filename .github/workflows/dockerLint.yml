@@ -1,7 +1,11 @@
 ---
-name: Docker workflow
+name: Dockerfile Linter
 'on':
   workflow_call:
+    inputs:
+      dockerfilePath:
+        required: true
+        type: string
 
 jobs:
   lint:
@@ -11,6 +15,6 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
 
-      - name: Lint code
+      - name: Lint Dockerfile
         run: |
-          echo "I will Lint."
+          docker run --rm -i -v ${PWD}/.hadolint.yml:/.hadolint.yml hadolint/hadolint < ${{ inputs.dockerfilePath }}
