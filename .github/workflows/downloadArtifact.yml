@@ -22,6 +22,6 @@ jobs:
           path: ${{ inputs.path }}
       - name: Source Metadata
         run: |
-          source ${{ inputs.path }}
+          source ${{ inputs.path }}/${{ inputs.artifact }}
           echo $name
           echo $version
