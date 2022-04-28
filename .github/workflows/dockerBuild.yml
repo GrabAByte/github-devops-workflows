@@ -27,12 +27,7 @@ jobs:
           name: ${{ inputs.outputFile }}
           path: ${{ inputs.outputPath }}
 
-      - name: Display Metadata
+      - name: Build Image
         run: |
           source ${{ inputs.outputPath }}/${{ inputs.outputFile }}
-          echo $projectName
-          echo $projectVersion
-
-      - name: Build Code
-        run: |
           docker build -t="$GITHUB_REPOSITORY_OWNER/$projectName:$projectVersion" -f ${{ inputs.dockerfilePath }} .
