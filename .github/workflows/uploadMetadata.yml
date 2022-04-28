@@ -17,4 +17,4 @@ jobs:
     uses: GrabAByte/github-devops-workflows/.github/workflows/uploadArtifact.yml@feat/shareVars
     with:
       artifact: metadata.sh
-          path: metadata
+      path: metadata
