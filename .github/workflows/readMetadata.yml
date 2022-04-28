@@ -3,10 +3,10 @@ name: Read Metadata
 'on':
   workflow_call:
     inputs:
-      file:
+      outputFile:
         required: true
         type: string
-      path:
+      outputPath:
         required: true
         type: string
 
