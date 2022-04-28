@@ -20,8 +20,6 @@ jobs:
         with:
           name: ${{ inputs.artifact }}
           path: ${{ inputs.path }}
-      - name: Source Metadata
+      - name: Read Metadata
         run: |
-          source ${{ inputs.path }}/${{ inputs.artifact }}
-          echo $name
-          echo $version
+          cat ${{ inputs.path }}/${{ inputs.artifact }}
