@@ -16,6 +16,7 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: ${{ inputs.artifact }}
+          path: ${{ inputs.path }}
       - name: Source Metadata
         run: |
           source ${{ inputs.artifact }}
