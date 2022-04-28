@@ -30,4 +30,4 @@ jobs:
       - name: Build Image
         run: |
           source ${{ inputs.outputPath }}/${{ inputs.outputFile }}
-          docker build -t="$GITHUB_REPOSITORY_OWNER/$projectName:$projectVersion" -f ${{ inputs.dockerfilePath }} .
+          docker build -t="${GITHUB_REPOSITORY_OWNER,,}/$projectName:$projectVersion" -f ${{ inputs.dockerfilePath }} .
