@@ -27,4 +27,5 @@ jobs:
         run: |
           npm-groovy-lint \
             --path ${{ inputs.groovyPath }} \
-            --files "**/*.groovy"
+            --files "**/*.groovy" && \
+          echo "Groovy Linting: Successful"

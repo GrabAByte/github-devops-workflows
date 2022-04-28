@@ -25,4 +25,5 @@ jobs:
 
       - name: Lint code
         run: |
-          yamllint ${{ inputs.yamlPath }}
+          yamllint ${{ inputs.yamlPath }} && \
+          echo "YAML Linting: Successful"

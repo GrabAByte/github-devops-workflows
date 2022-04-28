@@ -8,13 +8,20 @@ name: Docker Build
         type: string
 
 jobs:
-  build:
-    name: Build
+  docker-build:
+    name: Build Docker Image
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the codebase.
+      - name: Check out the codebase
         uses: actions/checkout@v2
 
-      - name: Build Code
+      - name: Download file
+        uses: actions/download-artifact@v1
+        with:
+          name: metadata.sh
+          path: metadata
+
+      - name: Build Image
         run: |
-          docker build -t="test" -f ${{ inputs.dockerfilePath }} .
+          source metadata/metadata.sh
+          docker build -t="${GITHUB_REPOSITORY_OWNER,,}/$projectName:$projectVersion" -f ${{ inputs.dockerfilePath }} .
