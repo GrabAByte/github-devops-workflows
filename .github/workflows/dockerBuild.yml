@@ -2,6 +2,10 @@
 name: Docker Build
 'on':
   workflow_call:
+    inputs:
+      dockerfilePath:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -13,4 +17,4 @@ jobs:
 
       - name: Build Code
         run: |
-          echo "I will build."
+          docker build -t="test" -f ${{ inputs.dockerfilePath }} .
