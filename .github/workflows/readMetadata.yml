@@ -2,13 +2,6 @@
 name: Read Metadata
 'on':
   workflow_call:
-    inputs:
-      outputFile:
-        required: true
-        type: string
-      outputPath:
-        required: true
-        type: string
 
 jobs:
   read-metadata:
