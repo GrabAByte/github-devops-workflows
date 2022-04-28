@@ -18,4 +18,4 @@ jobs:
       - name: Lint Dockerfile
         run: |
           docker run --rm -i -v ${PWD}/.hadolint.yml:/.hadolint.yml hadolint/hadolint < ${{ inputs.dockerfilePath }} && \
-        echo "Docking Linting: Passed
+        echo "Docking Linting: Passed"
