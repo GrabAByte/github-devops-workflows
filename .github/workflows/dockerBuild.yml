@@ -6,6 +6,32 @@ name: Docker Build
       dockerfilePath:
         required: true
         type: string
+       outputFile:
+        required: true
+        type: string
+      outputPath:
+        required: true
+        type: string
+
+jobs:
+  read-metadata:
+    name: Read Metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Download file
+        uses: actions/download-artifact@v1
+        with:
+          name: ${{ inputs.outputFile }}
+          path: ${{ inputs.outputPath }}
+
+      - name: Display Metadata
+        run: |
+          source ${{ inputs.outputPath }}/${{ inputs.outputFile }}
+          echo $projectName
+          echo $projectVersion
 
 jobs:
   build:
