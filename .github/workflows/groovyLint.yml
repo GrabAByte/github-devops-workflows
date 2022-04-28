@@ -1,1 +1,26 @@
 ---
+name: Groovy Linter
+'on':
+  workflow_call:
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Set up Node 14
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Install Linting Dependencies
+        run: npm install -g npm-groovy-lint
+
+      - name: Lint code
+        run: |
+          npm-groovy-lint \
+            --path . \
+            --files "**/*.groovy"
