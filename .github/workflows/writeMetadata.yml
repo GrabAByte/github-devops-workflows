@@ -1,0 +1,55 @@
+---
+name: Write Metadata
+'on':
+  workflow_call:
+    inputs:
+      inputFile:
+        required: true
+        type: string
+      inputPath:
+        required: true
+        type: string
+      outputFile:
+        required: true
+        type: string
+      outputPath:
+        required: true
+        type: string
+
+jobs:
+  write-metadata:
+    name: Write Metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Bump Artifact Version
+        run: |
+          case ${{ inputs.inputFile }} in
+            *.yml|*.yaml)
+              if [ ${{ env.GITHUB_REF }} = '/ref/heads/main' ]; then
+                projectVersion=$(grep -w version ${{ inputs.inputPath }}/${{ inputs.inputFile }} | cut -d ':' -f2 | tr -d ' ",')
+                echo "projectVersion=${projectVersion}"
+              else
+                projectVersion=$(grep -w version ${{ inputs.inputPath }}/${{ inputs.inputFile }} | cut -d ':' -f2 | tr -d ' ",')-${{ env.GITHUB_RUN_ID }}
+              fi
+            ;;
+            *.json)
+              if [ ${{ env.GITHUB_REF }} = '/ref/heads/main' ]; then
+                projectVersion=$(grep version ${{ inputs.inputPath }}/${{ inputs.inputFile }} | cut -d ':' -f2 | tr -d ' ",')
+              else
+                projectVersion=$(grep version ${{ inputs.inputPath }}/${{ inputs.inputFile }} | cut -d ':' -f2 | tr -d ' ",')-${{ env.GITHUB_RUN_ID }}
+              fi
+            ;;
+          esac
+          projectName=$(grep name ${{ inputs.inputPath }}/${{ inputs.inputFile }} | cut -d ':' -f2 | tr -d ' ",')
+          echo "projectName${projectName}" >> ${{ inputs.outputPath }}/${{ inputs.outputFile }}
+          echo "projectVersion=${projectVersion}" >> ${{ inputs.outputPath }}/${{ inputs.outputFile }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ inputs.outputFile }}
+          path: ${{ inputs.outputPath }}
+          retention-days: 1
