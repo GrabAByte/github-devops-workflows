@@ -1,0 +1,13 @@
+---
+name: YAML Linter
+'on':
+  workflow_call:
+
+jobs:
+  bashFunctions:
+    name: functions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bash Functions
+        run: |
+          foo=bar

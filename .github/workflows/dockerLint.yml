@@ -17,4 +17,5 @@ jobs:
 
       - name: Lint Dockerfile
         run: |
+          echo "${foo}"
           docker run --rm -i -v ${PWD}/.hadolint.yml:/.hadolint.yml hadolint/hadolint < ${{ inputs.dockerfilePath }}
