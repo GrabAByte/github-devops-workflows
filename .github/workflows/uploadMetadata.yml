@@ -15,13 +15,13 @@ jobs:
     name: Gather Metadata
     runs-on: ubuntu-latest
     steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
       - name: Output metadata to artifact
         run: |
-          find . -type f
-          if [ ! -d ${{ inputs.path }} ]; then
-            mkdir ${{ inputs.path }}
-          fi
           sed -i 's/0.0.0/0.0.1/' ${{ inputs.path }}/${{ inputs.artifact }}
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
