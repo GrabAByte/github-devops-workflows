@@ -46,6 +46,7 @@ jobs:
           git status
           git branch
 
+          echo "test" >> LICENSE
           # Commit back to mainline with updates, if there are changes
           if [[ -z $(git status is) ]]; then
             git config --global user.name "${{ inputs.gitUsername }}"
