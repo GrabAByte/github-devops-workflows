@@ -38,6 +38,7 @@ jobs:
       - name: Build Docker Image
         run: |
           source metadata/metadata.sh
+          cat metadata/metadata.sh
           echo ${PROJECT_NAME}
           echo ${PROJECT_VERSION}
           docker build -t="${GITHUB_REPOSITORY_OWNER,,}/${PROJECT_NAME}:${PROJECT_VERSION}" -f ${{ inputs.dockerfilePath }} .
