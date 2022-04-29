@@ -43,6 +43,8 @@ jobs:
           # Bump Version to required new version
           echo "${CURRENT_VERSION} to ${FUTURE_VERSION} in file ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}"
           sed -i "s/${CURRENT_VERSION}/${FUTURE_VERSION}/" ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
+          git status
+          git branch
 
           # Commit back to mainline with updates, if there are changes
           if [[ -z $(git status is) ]]; then
