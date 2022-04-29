@@ -51,11 +51,9 @@ jobs:
 
           # Auto-Bumping relies on a commit message naming convention, starting with the change type.
           # Example "feat: I added something cool"
-          GIT_FULL_MESSAGE=$(git log)
           GIT_COMMIT=$(git log -1 --oneline | cut -d ' ' -f1)
           GIT_COMMIT_TYPE=$(git log -1 --oneline | cut -d ' ' -f2)
 
-          echo ${GIT_FULL_MESSAGE}
           echo ${GIT_COMMIT}
           echo ${GIT_COMMIT_TYPE}
 
@@ -69,6 +67,10 @@ jobs:
             ;;
             fix*|chore*|docs*)
               PATCH_VERSION=$(( $(echo ${PATCH_VERSION} | cut -d '.' -f2) + 1 ))
+            ;;
+            Merge*)
+              # The workglow generates this message from the git log
+              break
             ;;
             *)
              echo "Pipeline Aborted: Please follow the commit message naming convention"
