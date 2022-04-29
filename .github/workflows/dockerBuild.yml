@@ -16,7 +16,7 @@ name: Docker Build and Publish
 
 jobs:
   docker-build-publish:
-    name: Build Docker Image
+    name: Build and Publish Image
     environment: CI
     runs-on: ubuntu-latest
     steps:
