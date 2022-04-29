@@ -1,16 +1,24 @@
 ---
-name: Docker Build
+name: Docker Build and Publish
 'on':
   workflow_call:
     inputs:
       dockerfilePath:
         required: true
         type: string
+    secrets:
+      DOCKERHUB_USERNAME:
+        description: 'The Docker Hub Username'
+        required: true
+      DOCKERHUB_TOKEN:
+        description: 'The Docker Hub Password'
+        required: true
 
 jobs:
-  docker-build:
+  docker-build-publish:
     name: Build Docker Image
     runs-on: ubuntu-latest
+    environment: CI
     steps:
       - name: Check out the codebase
         uses: actions/checkout@v2
@@ -21,7 +29,18 @@ jobs:
           name: metadata.sh
           path: metadata
 
-      - name: Build Image
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker Image
         run: |
           source metadata/metadata.sh
           docker build -t="${GITHUB_REPOSITORY_OWNER,,}/$projectName:$projectVersion" -f ${{ inputs.dockerfilePath }} .
+
+      - name: Publish Docker Image
+        run: |
+          source metadata/metadata.sh
+          docker push ${GITHUB_REPOSITORY_OWNER,,}/$projectName:$projectVersion
