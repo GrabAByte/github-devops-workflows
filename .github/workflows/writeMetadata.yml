@@ -62,8 +62,8 @@ jobs:
               PATCH_VERSION=$(( $(echo ${PATCH_VERSION} | cut -d '.' -f2) + 1 ))
             ;;
             *)
-             echo "Pipeline Failed: Please follow the commit message naming convention"
-             exit 1
+             echo "Pipeline Aborted: Please follow the commit message naming convention"
+             exit 0
             ;;
           esac
 
