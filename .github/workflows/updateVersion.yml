@@ -6,7 +6,7 @@ name: Update Version
       - main
   workflow_call:
     inputs:
-      gitUsernmae:
+      gitUsername:
         required: true
         type: string
       gitEmail:
@@ -44,7 +44,7 @@ jobs:
           sed -i "s/${CURRENT_VERSION}/${FUTURE_VERSION}/" ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
 
           # Commit back to mainline with updates
-          git config --global user.name "${{ inputs.gitUsername}}"
+          git config --global user.name "${{ inputs.gitUsername }}"
           git config --global user.email "${{ inputs.gitEmail }}"
           git add CHANGELOG.md ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
           git commit -m "github pipeline: automated version bump to from ${CURRENT_VERSION} to ${FUTURE_VERSION}"
