@@ -30,14 +30,14 @@ jobs:
                 PROJECT_VERSION=$(grep -w version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')
                 echo "PROJECT_VERSION=${PROJECT_VERSION}"
               else
-                PROJECT_VERSION=$(grep -w version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')-$GITHUB_RUN_ID
+                PROJECT_VERSION=$(grep -w version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')-rc$GITHUB_RUN_ID
               fi
             ;;
             *.json)
               if [ $GITHUB_REF_NAME = main ]; then
                 PROJECT_VERSION=$(grep version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')
               else
-                PROJECT_VERSION=$(grep version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')-$GITHUB_RUN_ID
+                PROJECT_VERSION=$(grep version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')-rc$GITHUB_RUN_ID
               fi
             ;;
           esac
