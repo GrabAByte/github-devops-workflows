@@ -41,6 +41,7 @@ jobs:
           ## HERE
 
           # Bump Version to required new version
+          echo "${CURRENT_VERSION} to ${FUTURE_VERSION} in file ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}"
           sed -i "s/${CURRENT_VERSION}/${FUTURE_VERSION}/" ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
 
           # Commit back to mainline with updates
