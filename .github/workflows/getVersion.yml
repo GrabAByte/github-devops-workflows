@@ -1,5 +1,5 @@
 ---
-name: Write Metadata
+name: Get Version
 'on':
   workflow_call:
     inputs:
@@ -11,8 +11,8 @@ name: Write Metadata
         type: string
 
 jobs:
-  write-metadata:
-    name: Write Metadata
+  get-version:
+    name: Get Version
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase.
@@ -50,7 +50,7 @@ jobs:
           CURRENT_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
 
           mkdir metadata
-          echo "CURRENT_VERSION=${CURRENT_VERSION}" >> metadata/metadata.sh
+          echo "CURRENT_VERSION=${CURRENT_VERSION}" >> metadata/version.sh
 
           echo ${MAJOR_VERSION}
           echo ${MINOR_VERSION}
@@ -86,13 +86,13 @@ jobs:
 
           FUTURE_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
 
-          echo "PROJECT_NAME=${PROJECT_NAME}" >> metadata/metadata.sh
-          echo "FUTURE_VERSION=${PROJECT_VERSION}" >> metadata/metadata.sh
-          echo "GIT_COMMIT=${GIT_COMMIT}" >> metadata/metadata.sh
+          echo "PROJECT_NAME=${PROJECT_NAME}" >> metadata/version.sh
+          echo "FUTURE_VERSION=${PROJECT_VERSION}" >> metadata/version.sh
+          echo "GIT_COMMIT=${GIT_COMMIT}" >> metadata/version.sh
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: metadata.sh
+          name: version.sh
           path: metadata
           retention-days: 1
