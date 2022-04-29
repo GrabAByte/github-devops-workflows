@@ -40,7 +40,7 @@ jobs:
             echo "${CURRENT_VERSION} to ${FUTURE_VERSION} in file ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}"
             sed -i "s/${CURRENT_VERSION}/${FUTURE_VERSION}/" ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
             # Commit back to mainline with updates, if there are changes
-            if [[ -z $(git status -s) ]]; then
+            if [[ ! -z $(git status -s) ]]; then
               git config --global user.name "${{ inputs.gitUsername }}"
               git config --global user.email "${{ inputs.gitEmail }}"
               git add ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
