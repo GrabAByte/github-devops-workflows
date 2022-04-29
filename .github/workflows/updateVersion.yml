@@ -46,7 +46,7 @@ jobs:
               git config --global user.name "${{ inputs.gitUsername }}"
               git config --global user.email "${{ inputs.gitEmail }}"
               git add CHANGELOG.md ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
-              git commit -m "github pipeline: automated version bump to from ${CURRENT_VERSION} to ${FUTURE_VERSION}"
+              git commit -m "github pipeline: automated version bump from ${CURRENT_VERSION} to ${FUTURE_VERSION}"
               git push
             fi
           fi
