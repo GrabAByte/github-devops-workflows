@@ -1,0 +1,43 @@
+---
+name: Update Version
+'on':
+  push:
+    branches:
+      - main
+  workflow_call:
+    inputs:
+      metadataFile:
+        required: true
+        type: string
+      metadataPath:
+        required: true
+        type: string
+
+jobs:
+  versioning:
+    name: Update Version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v2
+
+      - name: Download Metadata
+        uses: actions/download-artifact@v1
+        with:
+          name: metadata.sh
+          path: metadata
+
+      - name: Bump Versioning and update CHANGELOG.md
+        run: |
+          source metadata/metadata.sh
+          # Update CHANGELOG.md with appropriate entry
+
+          ## HERE
+
+          # Bump Version to required new version
+          sed -i "s/${CURRENT_VERSION}/${FUTURE_VERSION}/" ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
+
+          # Commit back to mainline with updates
+          git add CHANGELOG.md ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
+          git commit -m "github pipeline: automated version bump to from ${CURRENT_VERSION} to ${FUTURE_VERSION}"
+          git push
