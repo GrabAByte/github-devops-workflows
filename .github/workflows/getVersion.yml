@@ -87,7 +87,7 @@ jobs:
           FUTURE_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
 
           echo "PROJECT_NAME=${PROJECT_NAME}" >> metadata/version.sh
-          echo "FUTURE_VERSION=${PROJECT_VERSION}" >> metadata/version.sh
+          echo "FUTURE_VERSION=${FUTURE_VERSION}" >> metadata/version.sh
           echo "GIT_COMMIT=${GIT_COMMIT}" >> metadata/version.sh
 
       - name: Upload Artifact
