@@ -39,15 +39,11 @@ jobs:
             # Bump Version to required new version
             echo "${CURRENT_VERSION} to ${FUTURE_VERSION} in file ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}"
             sed -i "s/${CURRENT_VERSION}/${FUTURE_VERSION}/" ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
-
-            touch file.txt
-            git status
             # Commit back to mainline with updates, if there are changes
-            if [[ -z $(git status is) ]]; then
+            if [[ -z $(git status -s) ]]; then
               git config --global user.name "${{ inputs.gitUsername }}"
               git config --global user.email "${{ inputs.gitEmail }}"
               git add ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
-              git add file.txt
               git commit -m "github pipeline: automated version bump from ${CURRENT_VERSION} to ${FUTURE_VERSION}"
               git push
             fi
