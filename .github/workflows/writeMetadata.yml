@@ -70,7 +70,7 @@ jobs:
             ;;
             Merge*)
               # The workglow generates this message from the git log
-              break
+              :
             ;;
             *)
              echo "Pipeline Aborted: Please follow the commit message naming convention"
