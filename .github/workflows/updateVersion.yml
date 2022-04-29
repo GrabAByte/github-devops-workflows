@@ -30,12 +30,12 @@ jobs:
       - name: Download Metadata
         uses: actions/download-artifact@v1
         with:
-          name: metadata.sh
+          name: version.sh
           path: metadata
 
       - name: Bump Versioning and update CHANGELOG.md
         run: |
-          source metadata/metadata.sh
+          source metadata/version.sh
           # Update CHANGELOG.md with appropriate entry
 
           ## HERE
