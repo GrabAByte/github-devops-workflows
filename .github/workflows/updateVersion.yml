@@ -32,7 +32,7 @@ jobs:
 
       - name: Bump Versioning and update CHANGELOG.md
         run: |
-          source metadata/version.sj
+          source metadata/version.sh
           if [ $GITHUB_REF_NAME = main ]; then
             git checkout main
             # Update CHANGELOG.md with appropriate entry
