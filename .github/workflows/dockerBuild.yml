@@ -41,7 +41,7 @@ jobs:
           cat metadata/metadata.sh
           echo ${PROJECT_NAME}
           echo ${PROJECT_VERSION}
-          docker build -t="${GITHUB_REPOSITORY_OWNER,,}/${PROJECT_NAME}:${PROJECT_VERSION}" -f ${{ inputs.dockerfilePath }} .
+          docker build -t="${GITHUB_REPOSITORY_OWNER,,}/${PROJECT_NAME}:${CURRENT_VERSION}" -f ${{ inputs.dockerfilePath }} .
 
       - name: Publish Docker Image
         run: |
