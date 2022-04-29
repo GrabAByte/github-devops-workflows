@@ -18,6 +18,7 @@ jobs:
   docker-build-publish:
     name: Build Docker Image
     runs-on: ubuntu-latest
+    environment: CI
     steps:
       - name: Check out the codebase
         uses: actions/checkout@v2
