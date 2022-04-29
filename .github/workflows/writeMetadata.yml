@@ -69,12 +69,11 @@ jobs:
               PATCH_VERSION=$(( $(echo ${PATCH_VERSION} | cut -d '.' -f2) + 1 ))
             ;;
             Merge*)
-              # The workglow generates this message from the git log
               :
             ;;
             *)
-             echo "Pipeline Aborted: Please follow the commit message naming convention"
-             exit 0
+             echo "Pipeline Aborted: Please follow the commit message naming convention. All commit messages must start with breaking, feat, fix, chore or docs"
+             exit 1
             ;;
           esac
 
