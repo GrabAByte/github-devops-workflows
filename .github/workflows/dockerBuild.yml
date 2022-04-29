@@ -25,7 +25,7 @@ jobs:
       - name: Download file
         uses: actions/download-artifact@v1
         with:
-          name: metadata.sh
+          name: version.sh
           path: metadata
 
       - name: Login to DockerHub
