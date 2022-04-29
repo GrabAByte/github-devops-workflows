@@ -7,10 +7,10 @@ name: Docker Build and Publish
         required: true
         type: string
     secrets:
-      username:
+      DOCKERHUB_USERNAME:
         description: 'The Docker Hub Username'
         required: true
-      token:
+      DOCKERHUB_TOKEN:
         description: 'The Docker Hub Password'
         required: true
 
@@ -31,8 +31,8 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.username }}
-          password: ${{ secrets.password }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build Docker Image
         run: |
