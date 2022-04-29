@@ -78,10 +78,7 @@ jobs:
             ;;
           esac
 
-          # Lets not actually bump unless we are on mainline
-          if [ $GITHUB_REF_NAME = main ]; then
-            FINAL_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
-          fi
+          FINAL_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
 
           mkdir metadata
           echo "PROJECT_NAME=${PROJECT_NAME}" >> metadata/metadata.sh
