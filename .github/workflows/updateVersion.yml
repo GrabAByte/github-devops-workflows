@@ -34,7 +34,15 @@ jobs:
         run: |
           source metadata/version.sh
           if [ $GITHUB_REF_NAME = main ]; then
-            # Update CHANGELOG.md with appropriate entry
+            # Manage CHANGELOG.md with appropriate header
+            if [ ! -f CHANGELOG.md ]; then
+              echo "# Changelog" > CHANGELOG.md
+            fi
+            # This is not particularly elegant and should be looked to be improved upon
+            entryHeader=$(echo "## [${CURRENT_VERSION}] - ($(date +%d-%m-%Y))")
+            sed -i "/Changelog/a ${entryHeader}" CHANGELOG.md
+            sed -i "/Changelog/{G;}" CHANGELOG.md
+            sed -i "/${CURRENT_VERSION}/a ${GIT_COMMIT}" CHANGELOG.md
             # Bump Version to required new version
             sed -i "s/${CURRENT_VERSION}/${FUTURE_VERSION}/" ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
             # Commit back to mainline with updates, if there are changes
