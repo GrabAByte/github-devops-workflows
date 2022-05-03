@@ -35,7 +35,6 @@ jobs:
           source metadata/version.sh
           echo "::set-output name=NAME::${PROJECT_NAME}"
           echo "::set-output name=VERSION::${FUTURE_VERSION}"
-          echo "::set-output name=OWNER::${GITHUB_REPOSITORY_OWNER,,}"
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -49,4 +48,4 @@ jobs:
           context: .
           file: ${{ env.dockerfilePath }}
           push: ${{ contains(github.ref, 'refs/heads/main') }}
-          tags: ${{ steps.metadata.outputs.NAMEOWNER }}/${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }}
+          tags: ${{ github.repository_owner }}/${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }}
