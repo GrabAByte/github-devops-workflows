@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.0.4] - (03-05-2022)
+fix: (e749279) Bump and rc as standard for new branches (#16)
+
 ## [0.0.3] - (03-05-2022)
 fix: (ed6a229) Provide further verbosity to commit message (#15)
 
