@@ -56,6 +56,7 @@ jobs:
           # Example "feat: I added something cool"
           GIT_COMMIT=$(git log -1 --oneline | cut -d ' ' -f1)
           GIT_COMMIT_TYPE=$(git log -1 --oneline | cut -d ' ' -f2)
+          GIT_COMMIT_MESSAGE=$(git log -1 --oneline | cut -d ' ' -f2-)
 
           # A small number of commit types for now
           case "${GIT_COMMIT_TYPE}" in
@@ -81,7 +82,7 @@ jobs:
 
           echo "PROJECT_NAME=${PROJECT_NAME}" >> metadata/version.sh
           echo "FUTURE_VERSION=${FUTURE_VERSION}" >> metadata/version.sh
-          echo "GIT_COMMIT=${GIT_COMMIT}" >> metadata/version.sh
+          echo "GIT_COMMIT_MESSAGE=${GIT_COMMIT_MESSAGE}" >> metadata/version.sh
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
