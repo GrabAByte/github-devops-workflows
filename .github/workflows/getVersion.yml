@@ -58,6 +58,7 @@ jobs:
           GIT_COMMIT_TYPE=$(git log -1 --oneline | cut -d ' ' -f2)
           GIT_COMMIT_MESSAGE=$(git log -1 --oneline | cut -d ' ' -f2-)
 
+          echo "${GIT_COMMIT_MESSAGE}"
           # A small number of commit types for now
           case "${GIT_COMMIT_TYPE}" in
             breaking*)
