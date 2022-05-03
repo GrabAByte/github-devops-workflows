@@ -54,9 +54,10 @@ jobs:
 
           # Auto-Bumping relies on a commit message naming convention, starting with the change type
           # Example "feat: I added something cool"
-          GIT_COMMIT=$(git log -1 --oneline | cut -d ' ' -f1)
+          GIT_COMMIT_ID=$(git log -1 --oneline | cut -d ' ' -f1)
           GIT_COMMIT_TYPE=$(git log -1 --oneline | cut -d ' ' -f2)
-          GIT_COMMIT_MESSAGE=$(git log -1 --oneline | cut -d ' ' -f2-)
+          GIT_COMMIT_MESSAGE=$(git log -1 --oneline | cut -d ' ' -f3-)
+          FINAL_COMMIT_MESSAGE="${GIT_COMMIT_TYPE} (${GIT_COMMIT_ID}) ${GIT_COMMIT_MESSAGE}"
 
           echo "${GIT_COMMIT_MESSAGE}"
           # A small number of commit types for now
@@ -83,7 +84,7 @@ jobs:
 
           echo "PROJECT_NAME=${PROJECT_NAME}" >> metadata/version.sh
           echo "FUTURE_VERSION=${FUTURE_VERSION}" >> metadata/version.sh
-          echo "GIT_COMMIT_MESSAGE=\"${GIT_COMMIT_MESSAGE}\"" >> metadata/version.sh
+          echo "GIT_COMMIT_MESSAGE=\"${FINAL_COMMIT_MESSAGE}\"" >> metadata/version.sh
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
