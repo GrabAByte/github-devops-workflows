@@ -83,7 +83,7 @@ jobs:
 
           echo "PROJECT_NAME=${PROJECT_NAME}" >> metadata/version.sh
           echo "FUTURE_VERSION=${FUTURE_VERSION}" >> metadata/version.sh
-          echo "GIT_COMMIT_MESSAGE=${GIT_COMMIT_MESSAGE}" >> metadata/version.sh
+          echo "GIT_COMMIT_MESSAGE=\"${GIT_COMMIT_MESSAGE}\"" >> metadata/version.sh
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
