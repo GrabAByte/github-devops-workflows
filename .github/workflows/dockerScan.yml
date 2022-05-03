@@ -1,0 +1,36 @@
+---
+name: Dockerfile Scan
+'on':
+  workflow_call:
+    inputs:
+      dockerfilePath:
+        required: true
+        type: string
+    secrets:
+      DOCKERHUB_USERNAME:
+        description: 'The Docker Hub Username'
+        required: true
+      DOCKERHUB_TOKEN:
+        description: 'The Docker Hub Password'
+        required: true
+
+
+jobs:
+  scan:
+    name: Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Scan Dockerfile
+        run: |
+          docker scan --accept-license --version
+          yes | docker scan --file ${{ inputs.dockerfilePath }} && \
+          echo "Docker Security Scan: Successful"
