@@ -40,6 +40,15 @@ jobs:
           source metadata/version.sh
           docker build -t="${GITHUB_REPOSITORY_OWNER,,}/${PROJECT_NAME}:${FUTURE_VERSION}" -f ${{ inputs.dockerfilePath }} .
 
+      - name: Run Snyk Vulnerability scanner for Docker
+        continue-on-error: true
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: ${PROJECT_NAME}:${FUTURE_VERSION}
+          args: --file=${{ inputs.dockerfilePath }}
+
       - name: Publish Docker Image
         run: |
           if [ $GITHUB_REF_NAME = main ]; then
