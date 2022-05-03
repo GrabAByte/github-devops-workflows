@@ -42,8 +42,8 @@ jobs:
         id: metadata
         run: |
           source metadata/version.sh
-          Write-Output "::set-output name=NAME::${PROJECT_NAME}"
-          Write-Output "::set-output name=VERSION::${FUTURE_VERSION}"
+          echo "::set-output name=NAME::${PROJECT_NAME}"
+          echo "::set-output name=VERSION::${FUTURE_VERSION}"
 
       - name: Run Snyk Vulnerability scanner for Docker
         continue-on-error: true
