@@ -69,9 +69,9 @@ jobs:
           GIT_COMMIT_MESSAGE=$(git log -1 --oneline | cut -d ' ' -f3-)
           FINAL_COMMIT_MESSAGE="${GIT_COMMIT_TYPE} (${GIT_COMMIT_ID}) ${GIT_COMMIT_MESSAGE}"
 
-          echo "PROJECT_NAME=${PROJECT_NAME}" >> metadata/version.sh
-          echo "FUTURE_VERSION=${FUTURE_VERSION}" >> metadata/version.sh
-          echo "GIT_COMMIT_MESSAGE=\"${FINAL_COMMIT_MESSAGE}\"" >> metadata/version.sh
+          echo "export PROJECT_NAME=${PROJECT_NAME}" >> metadata/version.sh
+          echo "export FUTURE_VERSION=${FUTURE_VERSION}" >> metadata/version.sh
+          echo "export GIT_COMMIT_MESSAGE=\"${FINAL_COMMIT_MESSAGE}\"" >> metadata/version.sh
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3

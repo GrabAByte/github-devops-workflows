@@ -1,5 +1,5 @@
 ---
-name: Docker Build and Publish
+name: Docker Vulnerability Scan
 'on':
   workflow_call:
     inputs:
@@ -13,10 +13,13 @@ name: Docker Build and Publish
       DOCKERHUB_TOKEN:
         description: 'The Docker Hub Password'
         required: true
+      SNYK_TOKEN:
+        description: 'The Snyk API Token'
+        required: true
 
 jobs:
-  docker-build-publish:
-    name: Build and Publish Image
+  scan:
+    name: Scan
     environment: CI
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +32,13 @@ jobs:
           name: version.sh
           path: metadata
 
-      - name: Source metadata
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Source Metadata
         id: metadata
         run: |
           source metadata/version.sh
@@ -37,16 +46,19 @@ jobs:
           echo "::set-output name=VERSION::${FUTURE_VERSION}"
           echo "::set-output name=OWNER::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Docker Build
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ${{ inputs.dockerfilePath }}
-          push: ${{ contains(github.ref, 'refs/heads/main') }}
-          tags: ${{ steps.metadata.outputs.OWNER }}/${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }}
+          #push: ${{ contains(github.ref, 'refs/heads/main') }}
+          tags: ${{ steps.metadata.outputs.OWNER }}/${{ steps.metadata.outputs.NAME}}:${{ steps.metadata.outputs.VERSION }}
+
+      - name: Run Snyk Vulnerability scanner for Docker
+        continue-on-error: true
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: ${{ steps.metadata.outputs.OWNER }}/${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }}
+          args: --file=${{ inputs.dockerfilePath }}
