@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.1.1] - (03-05-2022)
+fix: (18b6dbb) release candidate version logic
+
 ## [0.1.0] - (03-05-2022)
 feature: (c523ec2) Add Snyk docker scanning capability (#17)
 
