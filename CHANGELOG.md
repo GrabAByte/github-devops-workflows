@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.1.0] - (03-05-2022)
+feature: (c523ec2) Add Snyk docker scanning capability (#17)
+
 ## [0.0.5] - (03-05-2022)
 fix: (a817cbf) Correct role_name gathered from ansible CI
 
