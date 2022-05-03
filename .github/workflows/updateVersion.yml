@@ -51,7 +51,8 @@ jobs:
               git config --global user.email "${{ inputs.gitEmail }}"
               git add ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
               git add CHANGELOG.md
+              git tag ${CURRENT_VERSION}
               git commit -m "github pipeline: automated version bump from ${CURRENT_VERSION} to ${FUTURE_VERSION}"
-              git push
+              git push --atomic origin main ${CURRENT_VERSION}
             fi
           fi
