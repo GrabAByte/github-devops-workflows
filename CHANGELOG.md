@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.0.2] - (03-05-2022)
+fix: (4945d9e) Provide further verbosity to commit message (#14)
+
 ## [0.0.1] - (03-05-2022)
 fix: commit commit message format issue (#13)
 
