@@ -39,10 +39,10 @@ jobs:
               echo "# Changelog" > CHANGELOG.md
             fi
             # This is not particularly elegant and should be looked to be improved upon
-            entryHeader=$(echo "## [${CURRENT_VERSION}] - ($(date +%d-%m-%Y))")
+            entryHeader=$(echo "## [${FUTURE_VERSION}] - ($(date +%d-%m-%Y))")
             sed -i "/Changelog/a ${entryHeader}" CHANGELOG.md
             sed -i "/Changelog/{G;}" CHANGELOG.md
-            sed -i "/${CURRENT_VERSION}/a ${GIT_COMMIT_MESSAGE}" CHANGELOG.md
+            sed -i "/${FUTURE_VERSION}/a ${GIT_COMMIT_MESSAGE}" CHANGELOG.md
             # Bump Version to required new version
             sed -i "s/${CURRENT_VERSION}/${FUTURE_VERSION}/" ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
             # Commit back to mainline with updates, if there are changes
@@ -51,8 +51,8 @@ jobs:
               git config --global user.email "${{ inputs.gitEmail }}"
               git add ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
               git add CHANGELOG.md
-              git tag ${CURRENT_VERSION}
+              git tag ${FUTURE_VERSION}
               git commit -m "github pipeline: automated version bump from ${CURRENT_VERSION} to ${FUTURE_VERSION}"
-              git push --atomic origin main ${CURRENT_VERSION}
+              git push --atomic origin main ${FUTURE_VERSION}
             fi
           fi

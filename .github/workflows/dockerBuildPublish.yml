@@ -38,9 +38,9 @@ jobs:
       - name: Build Docker Image
         run: |
           source metadata/version.sh
-          docker build -t="${GITHUB_REPOSITORY_OWNER,,}/${PROJECT_NAME}:${CURRENT_VERSION}" -f ${{ inputs.dockerfilePath }} .
+          docker build -t="${GITHUB_REPOSITORY_OWNER,,}/${PROJECT_NAME}:${FUTURE_VERSION}" -f ${{ inputs.dockerfilePath }} .
 
       - name: Publish Docker Image
         run: |
           source metadata/version.sh
-          docker push ${GITHUB_REPOSITORY_OWNER,,}/${PROJECT_NAME}:${CURRENT_VERSION}
+          docker push ${GITHUB_REPOSITORY_OWNER,,}/${PROJECT_NAME}:${FUTURE_VERSION}

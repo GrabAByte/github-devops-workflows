@@ -31,16 +31,24 @@ jobs:
           # Get the commit type from the commit message format
           GIT_COMMIT_TYPE=$(git log -1 --oneline | cut -d ' ' -f2)
 
+          # Gathering the version by each octet
+          MAJOR_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f1)
+          MINOR_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f2)
+          PATCH_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f3)
+
           # A small number of commit types for now
           case "${GIT_COMMIT_TYPE}" in
             breaking*)
               MAJOR_VERSION=$(( $(echo ${MAJOR_VERSION} | cut -d '.' -f1) + 1 ))
+              FUTURE_VERSION="${MAJOR_VERSION}.0.0"
             ;;
             feat*)
               MINOR_VERSION=$(( $(echo ${MINOR_VERSION} | cut -d '.' -f2) + 1 ))
+              FUTURE_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.0"
             ;;
             fix*|chore*|docs*)
               PATCH_VERSION=$(( $(echo ${PATCH_VERSION} | cut -d '.' -f2) + 1 ))
+              FUTURE_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
             ;;
             Merge*)
               :
@@ -51,15 +59,8 @@ jobs:
             ;;
           esac
 
-          # Gathering the version by each octet
-          MAJOR_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f1)
-          MINOR_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f2)
-          PATCH_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f3)
-
           # Set to working towards version based off the commit message
-          if [ $GITHUB_REF_NAME = main ]; then
-            FUTURE_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
-          else
+          if [ $GITHUB_REF_NAME != main ]; then
             FUTURE_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}-rc$GITHUB_RUN_ID"
           fi
 
