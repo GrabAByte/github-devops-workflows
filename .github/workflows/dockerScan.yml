@@ -39,8 +39,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Source Metadata
+        id: metadata
         run: |
           source metadata/version.sh
+          Write-Output "::set-output name=NAME::${PROJECT_NAME}"
+          Write-Output "::set-output name=VERSION::${FUTURE_VERSION}"
 
       - name: Run Snyk Vulnerability scanner for Docker
         continue-on-error: true
@@ -48,5 +51,5 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: ${PROJECT_NAME}:${FUTURE_VERSION}
+          image: ${{ steps.metadata.outputs.NAME}:${{ steps.metadata.outputs.VERSION }}
           args: --file=${{ inputs.dockerfilePath }}
