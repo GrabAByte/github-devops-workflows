@@ -34,6 +34,7 @@ jobs:
 
       - name: Install docker-scan-plugin
         run: |
+          sudo apt update -y && \
           sudo apt-get install docker-scan-plugin
 
       - name: Scan Dockerfile
