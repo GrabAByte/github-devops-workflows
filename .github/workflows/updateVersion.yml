@@ -32,8 +32,8 @@ jobs:
 
       - name: Bump Versioning and update CHANGELOG.md
         run: |
-          source metadata/version.sh
           if [ $GITHUB_REF_NAME = main ]; then
+            source metadata/version.sh
             # Manage CHANGELOG.md with appropriate header
             if [ ! -f CHANGELOG.md ]; then
               echo "# Changelog" > CHANGELOG.md
@@ -42,7 +42,7 @@ jobs:
             entryHeader=$(echo "## [${CURRENT_VERSION}] - ($(date +%d-%m-%Y))")
             sed -i "/Changelog/a ${entryHeader}" CHANGELOG.md
             sed -i "/Changelog/{G;}" CHANGELOG.md
-            sed -i "/${CURRENT_VERSION}/a ${GIT_COMMIT}" CHANGELOG.md
+            sed -i "/${CURRENT_VERSION}/a ${GIT_COMMIT_MESSAGE}" CHANGELOG.md
             # Bump Version to required new version
             sed -i "s/${CURRENT_VERSION}/${FUTURE_VERSION}/" ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
             # Commit back to mainline with updates, if there are changes
