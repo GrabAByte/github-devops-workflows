@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.0.5] - (03-05-2022)
+fix: (a817cbf) Correct role_name gathered from ansible CI
+
 ## [0.0.4] - (03-05-2022)
 fix: (e749279) Bump and rc as standard for new branches (#16)
 
