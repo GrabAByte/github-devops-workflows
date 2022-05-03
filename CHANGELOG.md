@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.0.3] - (03-05-2022)
+fix: (ed6a229) Provide further verbosity to commit message (#15)
+
 ## [0.0.2] - (03-05-2022)
 fix: (4945d9e) Provide further verbosity to commit message (#14)
 
