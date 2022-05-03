@@ -44,7 +44,7 @@ jobs:
           source metadata/version.sh
           echo "::set-output name=NAME::${PROJECT_NAME}"
           echo "::set-output name=VERSION::${FUTURE_VERSION}"
-          echo "::set-output name=OWNER::%{GITHUB_REPOSITORY_OWNER,,}"
+          echo "::set-output name=OWNER::${GITHUB_REPOSITORY_OWNER,,}"
 
       - name: Docker Build
         uses: docker/build-push-action@v2
