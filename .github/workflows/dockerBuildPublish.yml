@@ -42,5 +42,7 @@ jobs:
 
       - name: Publish Docker Image
         run: |
-          source metadata/version.sh
-          docker push ${GITHUB_REPOSITORY_OWNER,,}/${PROJECT_NAME}:${FUTURE_VERSION}
+          if [ $GITHUB_REF_NAME = main ]; then
+            source metadata/version.sh
+            docker push ${GITHUB_REPOSITORY_OWNER,,}/${PROJECT_NAME}:${FUTURE_VERSION}
+          fi
