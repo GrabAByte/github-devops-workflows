@@ -20,46 +20,17 @@ jobs:
 
       - name: Bump Artifact Version
         run: |
-          # Gather the project metadata from the referenced metadata file
-          # Use current version for RCs and next tag
-          # Use current version for CHANGELOG update
-          # Use future version at very end just to bump in metadata and set it for the next development cycle
-          case ${{ inputs.metadataFile }} in
-            *.yml|*.yaml)
-              if [ $GITHUB_REF_NAME = main ]; then
-                PROJECT_VERSION=$(grep -w version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')
-              else
-                PROJECT_VERSION=$(grep -w version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')-rc$GITHUB_RUN_ID
-              fi
-            ;;
-            *.json)
-              if [ $GITHUB_REF_NAME = main ]; then
-                PROJECT_VERSION=$(grep version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')
-              else
-                PROJECT_VERSION=$(grep version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')-rc$GITHUB_RUN_ID
-              fi
-            ;;
-          esac
+          # Gather current metadata
           PROJECT_NAME=$(grep name ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')
-
-          # Gathering the version by each octet
-          MAJOR_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f1)
-          MINOR_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f2)
-          PATCH_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f3)
-          CURRENT_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
+          CURRENT_VERSION=$(grep -w version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')
 
           # This directory will never be present due to the ephemeral nature of the hosted agents
           mkdir metadata
           echo "CURRENT_VERSION=${CURRENT_VERSION}" >> metadata/version.sh
 
-          # Auto-Bumping relies on a commit message naming convention, starting with the change type
-          # Example "feat: I added something cool"
-          GIT_COMMIT_ID=$(git log -1 --oneline | cut -d ' ' -f1)
+          # Get the commit type from the commit message format
           GIT_COMMIT_TYPE=$(git log -1 --oneline | cut -d ' ' -f2)
-          GIT_COMMIT_MESSAGE=$(git log -1 --oneline | cut -d ' ' -f3-)
-          FINAL_COMMIT_MESSAGE="${GIT_COMMIT_TYPE} (${GIT_COMMIT_ID}) ${GIT_COMMIT_MESSAGE}"
 
-          echo "${GIT_COMMIT_MESSAGE}"
           # A small number of commit types for now
           case "${GIT_COMMIT_TYPE}" in
             breaking*)
@@ -80,7 +51,22 @@ jobs:
             ;;
           esac
 
-          FUTURE_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
+          # Gathering the version by each octet
+          MAJOR_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f1)
+          MINOR_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f2)
+          PATCH_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f3)
+
+          # Set to working towards version based off the commit message
+          if [ $GITHUB_REF_NAME = main ]; then
+            FUTURE_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
+          else
+            FUTURE_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}-rc$GITHUB_RUN_ID"
+          fi
+
+          # Construct the git commit message format
+          GIT_COMMIT_ID=$(git log -1 --oneline | cut -d ' ' -f1)
+          GIT_COMMIT_MESSAGE=$(git log -1 --oneline | cut -d ' ' -f3-)
+          FINAL_COMMIT_MESSAGE="${GIT_COMMIT_TYPE} (${GIT_COMMIT_ID}) ${GIT_COMMIT_MESSAGE}"
 
           echo "PROJECT_NAME=${PROJECT_NAME}" >> metadata/version.sh
           echo "FUTURE_VERSION=${FUTURE_VERSION}" >> metadata/version.sh
