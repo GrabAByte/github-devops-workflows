@@ -34,16 +34,23 @@ jobs:
         run: |
           source metadata/version.sh
           if [ $GITHUB_REF_NAME = main ]; then
-            # Update CHANGELOG.md with appropriate entry
-            ## <HERE>
+            # Manage CHANGELOG.md with appropriate header
+            if [ ! -f CHANGELOG.md ]; then
+              echo "# Changelog" > CHANGELOG.md
+            fi
+            # This is not particularly elegant and should be looked to be improved upon
+            entryHeader=$(echo "## [${CURRENT_VERSION}] - ($(date +%d-%m-%Y))")
+            sed -i "/Changelog/a ${entryHeader}" CHANGELOG.md
+            sed -i "/Changelog/{G;}" CHANGELOG.md
+            sed -i "/${CURRENT_VERSION}/a ${GIT_COMMIT}" CHANGELOG.md
             # Bump Version to required new version
-            echo "${CURRENT_VERSION} to ${FUTURE_VERSION} in file ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}"
             sed -i "s/${CURRENT_VERSION}/${FUTURE_VERSION}/" ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
             # Commit back to mainline with updates, if there are changes
             if [[ ! -z $(git status -s) ]]; then
               git config --global user.name "${{ inputs.gitUsername }}"
               git config --global user.email "${{ inputs.gitEmail }}"
               git add ${{ inputs.metadataPath }}/${{ inputs.metadataFile }}
+              git add CHANGELOG.md
               git commit -m "github pipeline: automated version bump from ${CURRENT_VERSION} to ${FUTURE_VERSION}"
               git push
             fi

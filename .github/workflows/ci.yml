@@ -7,7 +7,21 @@ name: CI
       - main
 
 jobs:
-  yaml-lint:
-    uses: GrabAByte/github-devops-workflows/.github/workflows/yamlLint.yml@main
+  get-version:
+    uses: ./.github/workflows/getVersion.yml
     with:
-      yamlPath: '.'
+      metadataFile: 'metadata.json'
+      metadataPath: .
+  yaml-lint:
+    uses: ./.github/workflows/yamlLint.yml
+    with:
+      yamlPath: '.github'
+    needs: get-version
+  update-version:
+    uses: ./.github/workflows/updateVersion.yml
+    with:
+      gitUsername: 'grababyte'
+      gitEmail: 'grababyte@github.com'
+      metadataFile: 'metadata.json'
+      metadataPath: .
+    needs: yaml-lint
