@@ -6,14 +6,11 @@ name: CI
     branches:
       - main
 
-env:
-  METADATA_FILE: 'metadata.json'
-
 jobs:
   get-version:
     uses: ./.github/workflows/getVersion.yml
     with:
-      metadataFile: ${{ env.METADATA_FILE }}
+      metadataFile: 'metadata.json'
       metadataPath: .
   yaml-lint:
     uses: ./.github/workflows/yamlLint.yml
@@ -25,6 +22,6 @@ jobs:
     with:
       gitUsername: 'grababyte'
       gitEmail: 'grababyte@github.com'
-      metadataFile: ${{ env.METADATA_FILE }}
+      metadataFile: 'metadata.json'
       metadataPath: .
     needs: yaml-lint
