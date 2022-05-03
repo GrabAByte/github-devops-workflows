@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ${{ env.dockerfilePath }}
+          file: ${{ inputs.dockerfilePath }}
           push: ${{ contains(github.ref, 'refs/heads/main') }}
           tags: ${{ steps.metadata.outputs.OWNER }}/${{ steps.metadata.outputs.NAME}}:${{ steps.metadata.outputs.VERSION }}
 
