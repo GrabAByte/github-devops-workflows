@@ -44,6 +44,7 @@ jobs:
           source metadata/version.sh
           echo "::set-output name=NAME::${PROJECT_NAME}"
           echo "::set-output name=VERSION::${FUTURE_VERSION}"
+          echo "::set-env name=OWNER::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')"
 
       - name: Docker Build
         uses: docker/build-push-action@v2
@@ -51,7 +52,7 @@ jobs:
           context: .
           file: ${{ inputs.dockerfilePath }}
           push: ${{ contains(github.ref, 'refs/heads/main') }}
-          tags: ${{ github.repository_owner }}/${{ steps.metadata.outputs.NAME}}:${{ steps.metadata.outputs.VERSION }}
+          tags: ${{ steps.metadata.outputs.OWNER }}/${{ steps.metadata.outputs.NAME}}:${{ steps.metadata.outputs.VERSION }}
 
       - name: Run Snyk Vulnerability scanner for Docker
         continue-on-error: true
@@ -59,5 +60,5 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: ${{ github.repository_owner }}/${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }}
+          image: ${{ steps.metadata.outputs.OWNER }}/${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }}
           args: --file=${{ inputs.dockerfilePath }}
