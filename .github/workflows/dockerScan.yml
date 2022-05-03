@@ -14,10 +14,10 @@ name: Dockerfile Scan
         description: 'The Docker Hub Password'
         required: true
 
-
 jobs:
   scan:
     name: Scan
+    environment: CI
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase.
