@@ -51,18 +51,13 @@ jobs:
               FUTURE_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
             ;;
             Merge*)
-              :
+              FUTURE_VERSION="development-rc$GITHUB_RUN_ID"
             ;;
             *)
              echo "Pipeline Aborted: Please follow the commit message naming convention. All commit messages must start with breaking, feat, fix, chore or docs"
              exit 1
             ;;
           esac
-
-          # Set to working towards version based off the commit message
-          if [ $GITHUB_REF_NAME != main ]; then
-            FUTURE_VERSION="development-rc$GITHUB_RUN_ID"
-          fi
 
           # Construct the git commit message format
           GIT_COMMIT_ID=$(git log -1 --oneline | cut -d ' ' -f1)
