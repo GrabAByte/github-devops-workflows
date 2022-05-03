@@ -19,7 +19,7 @@ name: Docker Vulnerability Scan
 
 jobs:
   scan:
-    name: Scan Image
+    name: Scan
     environment: CI
     runs-on: ubuntu-latest
     steps:
@@ -45,11 +45,15 @@ jobs:
           echo "::set-output name=NAME::${PROJECT_NAME}"
           echo "::set-output name=VERSION::${FUTURE_VERSION}"
 
+      - name: Build Docker Image
+        run: |
+          docker build -t=${GITHUB_REPOSITORY_OWNER,,}/${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }} -f ${{ inputs.dockerfilePath }} .
+
       - name: Run Snyk Vulnerability scanner for Docker
         continue-on-error: true
         uses: snyk/actions/docker@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: ${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }}
+          image: ${GITHUB_REPOSITORY_OWNER,,}/${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }}
           args: --file=${{ inputs.dockerfilePath }}
