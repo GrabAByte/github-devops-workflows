@@ -32,9 +32,9 @@ jobs:
           GIT_COMMIT_TYPE=$(git log -1 --oneline | cut -d ' ' -f2)
 
           # Gathering the version by each octet
-          MAJOR_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f1)
-          MINOR_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f2)
-          PATCH_VERSION=$(echo ${PROJECT_VERSION} | cut -d '.' -f3)
+          MAJOR_VERSION=$(echo ${CURRENT_VERSION} | cut -d '.' -f1)
+          MINOR_VERSION=$(echo ${CURRENT_VERSION} | cut -d '.' -f2)
+          PATCH_VERSION=$(echo ${CURRENT_VERSION} | cut -d '.' -f3)
 
           # A small number of commit types for now
           case "${GIT_COMMIT_TYPE}" in
