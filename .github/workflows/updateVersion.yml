@@ -32,8 +32,8 @@ jobs:
 
       - name: Bump Versioning and update CHANGELOG.md
         run: |
-          source metadata/version.sh
           if [ $GITHUB_REF_NAME = main ]; then
+            source metadata/version.sh
             # Manage CHANGELOG.md with appropriate header
             if [ ! -f CHANGELOG.md ]; then
               echo "# Changelog" > CHANGELOG.md
