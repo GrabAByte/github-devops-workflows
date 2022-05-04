@@ -2,7 +2,7 @@
 name: Sonarcloud Scan
 'on':
   workflow_call:
-    inputs:
+    secrets:
       GITHUB_TOKEN:
         description: 'The github account Token'
         required: true
