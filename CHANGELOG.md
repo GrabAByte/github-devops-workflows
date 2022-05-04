@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.3.0] - (04-05-2022)
+feat: (858a698) Add dependabot for vulnerability scanning (#19)
+
 ## [0.2.0] - (04-05-2022)
 feature: (e10dd01) Add sonarcloud.io scan job (#18)
 
