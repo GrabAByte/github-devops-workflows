@@ -12,7 +12,7 @@ name: Sonarcloud Scan
 
 jobs:
   sonarcloud:
-    name: Sonar Scan
+    name: Sonar Code Analysis
     environment: CI
     runs-on: ubuntu-latest
     steps:
@@ -39,6 +39,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
+            # Case sensitivity requires new parameter
             -Dsonar.organization=${{ steps.metadata.outputs.OWNER }}
-            -Dsonar.projectKey=${{ github.repository_owner }}_${{ github.repository }}
+            -Dsonar.projectKey=${{ github.repository_owner }}_${{ github.event.repository.name }}
             -Dsonar.sources=.
