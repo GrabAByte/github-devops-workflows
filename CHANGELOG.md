@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.2.0] - (04-05-2022)
+feature: (e10dd01) Add sonarcloud.io scan job (#18)
+
 ## [0.1.1] - (03-05-2022)
 fix: (18b6dbb) release candidate version logic
 
