@@ -40,5 +40,5 @@ jobs:
         with:
           args: >
             -Dsonar.organization=${{ steps.metadata.outputs.OWNER }}
-            -Dsonar.projectKey=${{ steps.metadata.outputs.NAME }}
+            -Dsonar.projectKey=${{ github.repository_owner }}_${{ steps.metadata.outputs.NAME }}
             -Dsonar.sources=.
