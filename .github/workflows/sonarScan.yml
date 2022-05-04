@@ -1,0 +1,41 @@
+---
+name: Sonarcloud Scan
+'on':
+  workflow_call:
+    inputs:
+      SONAR_TOKEN:
+        description: 'The sonarcloud.io API Token'
+        required: true
+
+jobs:
+  sonarcloud:
+    name: Sonar Scan
+    environment: CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v2
+
+      - name: Download file
+        uses: actions/download-artifact@v1
+        with:
+          name: version.sh
+          path: metadata
+
+      - name: Source Metadata
+        id: metadata
+        run: |
+          source metadata/version.sh
+          echo "::set-output name=NAME::${PROJECT_NAME}"
+          echo "::set-output name=OWNER::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
+
+      - name: Sonar Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=${{ steps.metadata.outputs.OWNER }}
+            -Dsonar.projectKey=${{ steps.metadata.outputs.NAME }}
+            -Dsonar.sources=.
