@@ -19,17 +19,9 @@ jobs:
       - name: Check out the codebase
         uses: actions/checkout@v2
 
-      - name: Download file
-        uses: actions/download-artifact@v1
-        with:
-          name: version.sh
-          path: metadata
-
       - name: Source Metadata
         id: metadata
         run: |
-          source metadata/version.sh
-          echo "::set-output name=NAME::${PROJECT_NAME}"
           echo "::set-output name=OWNER::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
 
       - name: Sonar Scan
