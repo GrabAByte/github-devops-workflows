@@ -3,9 +3,14 @@ name: Sonarcloud Scan
 'on':
   workflow_call:
     inputs:
+      GITHUB_TOKEN:
+        description: 'The github account Token'
+        required: true
+        type: string
       SONAR_TOKEN:
         description: 'The sonarcloud.io API Token'
         required: true
+        type: string
 
 jobs:
   sonarcloud:
