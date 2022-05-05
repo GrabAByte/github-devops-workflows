@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         image:
-          - 'grababyte/ubuntu-base:0.3.0' # 2204
+          - 'geerlinguy/docker-ubuntu2204-ansible:latest' # 2204
 
     steps:
       - name: Check out the codebase
