@@ -25,7 +25,9 @@ jobs:
         run: pip3 install ansible molecule[docker] docker
 
       - name: Run Molecule tests
-        run: molecule --debug test
+        run: |
+          export ANSIBLE_REMOTE_TEMP=/tmp/.ansible
+          molecule --debug test
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
