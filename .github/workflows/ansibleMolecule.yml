@@ -2,14 +2,6 @@
 name: Ansible Molecule Test
 'on':
   workflow_call:
-    inputs:
-      dockerfilePath:
-        required: true
-        type: string
-    secrets:
-      GALAXY_TOKEN:
-        description: 'The Docker Hub Username'
-        required: true
 
 jobs:
   molecule:
