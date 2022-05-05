@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os:
-          - centos # 8.4
-          - ubuntu # 2204
-          - alpine # 3.14
+        image:
+          - 'grababyte/centos-base:0.2.0' # 8.4
+          - 'grababyte/ubuntu-base:0.2.0' # 2204
+          - 'grababyte/alpine-base:0.7.1' # 3.14
 
     steps:
       - name: Check out the codebase
@@ -31,4 +31,4 @@ jobs:
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
-          MOLECULE_OS: ${{ matrix.os }}
+          MOLECULE_IMAGE: ${{ matrix.image }}
