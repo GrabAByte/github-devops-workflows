@@ -1,0 +1,42 @@
+---
+name: Ansible Molecule Test
+'on':
+  workflow_call:
+    inputs:
+      dockerfilePath:
+        required: true
+        type: string
+    secrets:
+      GALAXY_TOKEN:
+        description: 'The Docker Hub Username'
+        required: true
+
+jobs:
+  molecule:
+    name: Molecule
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os:
+          - centos # 8.4
+          - ubuntu # 2204
+          - alpine # 3.14
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Molecule dependencies
+        run: pip3 install ansible molecule[docker] docker
+
+      - name: Run Molecule tests
+        run: molecule test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_OS: ${{ matrix.os }}
