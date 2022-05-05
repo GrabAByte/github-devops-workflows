@@ -27,7 +27,7 @@ jobs:
       - name: Run Molecule tests
         run: |
           export ANSIBLE_REMOTE_TEMP=/tmp/.ansible
-          export ANSBIBLE_REMOTE_USER=root
+          export ANSIBLE_REMOTE_USER=root
           molecule test
         env:
           PY_COLORS: '1'
