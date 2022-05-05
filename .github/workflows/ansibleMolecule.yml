@@ -10,9 +10,7 @@ jobs:
     strategy:
       matrix:
         image:
-          - 'grababyte/centos-base:0.2.0' # 8.4
-          - 'grababyte/ubuntu-base:0.2.0' # 2204
-          - 'grababyte/alpine-base:0.7.1' # 3.14
+          - 'grababyte/ubuntu-base:0.3.0' # 2204
 
     steps:
       - name: Check out the codebase
