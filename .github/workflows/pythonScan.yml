@@ -2,10 +2,10 @@
 name: Python Scan
 'on':
   workflow_call:
-  secrets:
-    SNYK_TOKEN:
-      description: 'The Snyk API Token'
-      required: true
+    secrets:
+      SNYK_TOKEN:
+        description: 'The Snyk API Token'
+        required: true
 
 jobs:
   scan:
