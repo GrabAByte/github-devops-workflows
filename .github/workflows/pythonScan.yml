@@ -2,10 +2,16 @@
 name: Python Scan
 'on':
   workflow_call:
+  secrets:
+    SNYK_TOKEN:
+      description: 'The Snyk API Token'
+      required: true
 
 jobs:
   scan:
-    runs-on: Python Vulnerability Scan
+    name: Python Vulnerability Scan
+    environment: CI
+    run_on: ubuntu-latest
     steps:
       - name: Check out the codebase
       - uses: actions/checkout@v2
