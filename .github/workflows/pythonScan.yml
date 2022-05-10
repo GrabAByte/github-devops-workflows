@@ -1,0 +1,16 @@
+---
+name: Python Scan
+'on':
+  workflow_call:
+
+jobs:
+  scan:
+    runs-on: Python Vulnerability Scan
+    steps:
+      - name: Check out the codebase
+      - uses: actions/checkout@v2
+
+      - name: Run Snyk Vulnerability scanner for Python
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

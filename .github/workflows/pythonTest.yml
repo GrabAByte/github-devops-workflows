@@ -1,15 +1,15 @@
 ---
-name: Python Linter
+name: Python Unit Tests
 'on':
   workflow_call:
     inputs:
-      appPath:
+      testPath:
         required: true
         type: string
 
 jobs:
-  lint:
-    name: Lint
+  test:
+    name: Unit Tests
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase.
@@ -21,9 +21,9 @@ jobs:
           python-version: '3.x'
 
       - name: Install Linting Dependencies
-        run: pip3 install pylint
+        run: pip3 install unittest
 
-      - name: Lint code
+      - name: Run unittest
         run: |
-          pylint ${{ inputs.appPath }} && \
-          echo "Python Linting: Successful"
+          echo "I will perform Python Unit Tests"
+          echo "python -m unittest discover ${testPath}"
