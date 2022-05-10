@@ -1,0 +1,43 @@
+---
+name: Ansible Release
+'on':
+  workflow_call:
+    secrets:
+      GALAXY_TOKEN:
+        description: 'The token to publish to ansible-galaxy'
+        required: true
+
+jobs:
+  release:
+    name: Ansible Release
+    environment: CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Download file
+        uses: actions/download-artifact@v1
+        with:
+          name: version.sh
+          path: metadata
+
+      - name: Source metadata
+        id: metadata
+        run: |
+          echo "::set-output name=NAME::${PROJECT_NAME}"
+          echo "::set-output name=OWNER::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Ansible.
+        run: pip3 install ansible-core
+
+      - name: Trigger a new import on Galaxy.
+        run: |
+          if [ $GITHUB_REF_NAME = main ]; then
+            ansible-galaxy role import --api-key ${{ secrets.GALAXY_TOKEN }} ${{ steps.metadata.outputs.OWNER }} ${{ steps.metadata.outputs.NAME }}
+          fi

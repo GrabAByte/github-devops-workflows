@@ -1,0 +1,35 @@
+---
+name: Ansible Molecule Test
+'on':
+  workflow_call:
+
+jobs:
+  molecule:
+    name: Molecule
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          - 'grababyte/alpine-base:0.7.1'
+          - 'grababyte/ubuntu-base:0.2.0'
+          - 'grababyte/centos-base:0.2.0'
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Molecule dependencies
+        run: pip3 install ansible ansible-lint molecule[docker] docker
+
+      - name: Run Molecule tests
+        run: |
+          molecule test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_IMAGE: ${{ matrix.image }}

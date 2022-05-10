@@ -51,7 +51,6 @@ jobs:
         with:
           context: .
           file: ${{ inputs.dockerfilePath }}
-          #push: ${{ contains(github.ref, 'refs/heads/main') }}
           tags: ${{ steps.metadata.outputs.OWNER }}/${{ steps.metadata.outputs.NAME}}:${{ steps.metadata.outputs.VERSION }}
 
       - name: Run Snyk Vulnerability scanner for Docker
