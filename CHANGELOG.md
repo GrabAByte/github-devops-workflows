@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.4.0] - (10-05-2022)
+feat: (fe95c43) Add molecule workflow (#20)
+
 ## [0.3.0] - (04-05-2022)
 feat: (858a698) Add dependabot for vulnerability scanning (#19)
 
