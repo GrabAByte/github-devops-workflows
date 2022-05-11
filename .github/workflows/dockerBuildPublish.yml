@@ -49,4 +49,6 @@ jobs:
           context: .
           file: ${{ inputs.dockerfilePath }}
           push: ${{ contains(github.ref, 'refs/heads/main') }}
-          tags: ${{ steps.metadata.outputs.OWNER }}/${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }}
+          tags: |
+            latest  # This will only publish to Docker Hub on the mainline branch
+            ${{ steps.metadata.outputs.OWNER }}/${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }}
