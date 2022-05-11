@@ -30,4 +30,4 @@ jobs:
       gitEmail: 'grababyte@github.com'
       metadataFile: 'metadata.json'
       metadataPath: .
-    needs: yaml-lint
+    needs: [yaml-lint, sonar-scan]
