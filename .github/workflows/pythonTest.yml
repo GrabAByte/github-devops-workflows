@@ -1,0 +1,26 @@
+---
+name: Python Unit Tests
+'on':
+  workflow_call:
+    inputs:
+      testPath:
+        required: true
+        type: string
+
+jobs:
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Run unittest
+        run: |
+          echo "I will perform Python Unit Tests"
+          echo "python -m unittest discover ${testPath}"
