@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.5.2] - (11-05-2022)
+fix: (3caa417) CI ordering to update version
+
 ## [0.5.1] - (11-05-2022)
 fix: (0763b99) push docker image with latest tag (#22)
 
