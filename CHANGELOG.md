@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.5.3] - (11-05-2022)
+fix: (0253eff) latest tag in dockerBuildPublish
+
 ## [0.5.2] - (11-05-2022)
 fix: (3caa417) CI ordering to update version
 
