@@ -19,7 +19,7 @@ name: Docker Vulnerability Scan
 
 jobs:
   scan:
-    name: Vulnerability Scan
+    name: Docker Vulnerability Scan
     environment: CI
     runs-on: ubuntu-latest
     steps:
