@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.5.1] - (11-05-2022)
+fix: (0763b99) push docker image with latest tag (#22)
+
 ## [0.5.0] - (11-05-2022)
 feat: (1ce9778) Add python placeholder jobs (#21)
 
