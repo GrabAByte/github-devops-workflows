@@ -21,8 +21,17 @@ jobs:
       - name: Bump Artifact Version
         run: |
           # Gather current metadata
-          PROJECT_NAME=$(grep name ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | head -1 | cut -d ':' -f2 | tr -d ' ",')
-          CURRENT_VERSION=$(grep -w version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d ':' -f2 | tr -d ' ",')
+          case ${{ inputs.metadataFile }} in
+            *.py)
+              DELIMETER='='
+            ;;
+            *)
+              DELIMETER=':'
+            ;;
+          esac
+
+          PROJECT_NAME=$(grep name ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | head -1 | cut -d "${DELIMETER}" -f2 | tr -d ' ",')
+          CURRENT_VERSION=$(grep -w version ${{ inputs.metadataPath }}/${{ inputs.metadataFile }} | cut -d "${DELIMETER}" -f2 | tr -d ' ",')
 
           # This directory will never be present due to the ephemeral nature of the hosted agents
           mkdir metadata
