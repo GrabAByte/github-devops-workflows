@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.5.0] - (11-05-2022)
+feat: (1ce9778) Add python placeholder jobs (#21)
+
 ## [0.4.0] - (10-05-2022)
 feat: (fe95c43) Add molecule workflow (#20)
 
