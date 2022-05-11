@@ -50,5 +50,5 @@ jobs:
           file: ${{ inputs.dockerfilePath }}
           push: ${{ contains(github.ref, 'refs/heads/main') }}
           tags: |
-            latest
+            ${{ steps.metadata.outputs.OWNER }}/${{ steps.metadata.outputs.NAME }}:latest
             ${{ steps.metadata.outputs.OWNER }}/${{ steps.metadata.outputs.NAME }}:${{ steps.metadata.outputs.VERSION }}
