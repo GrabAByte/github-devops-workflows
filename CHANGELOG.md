@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.6.0] - (20-06-2022)
+feat: (5ec56ce) Bash CI jobs (#23)
+
 ## [0.5.3] - (11-05-2022)
 fix: (0253eff) latest tag in dockerBuildPublish
 
