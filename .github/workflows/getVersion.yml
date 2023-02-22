@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
+        runs:
+          using: 'node16'
 
       - name: Bump Artifact Version
         run: |
