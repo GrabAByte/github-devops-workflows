@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.6.1] - (22-02-2023)
+fix: (aaf5aef) workflow deprecations (#24)
+
 ## [0.6.0] - (20-06-2022)
 feat: (5ec56ce) Bash CI jobs (#23)
 
