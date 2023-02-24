@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.6.2] - (24-02-2023)
+fix: (ed9d04c) Groovy Lint fail on (#26)
+
 ## [0.6.1] - (22-02-2023)
 fix: (aaf5aef) workflow deprecations (#24)
 
