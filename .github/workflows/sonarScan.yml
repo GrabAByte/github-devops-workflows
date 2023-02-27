@@ -32,6 +32,6 @@ jobs:
         with:
           # Case sensitivity requires OWNER to be passed as lowercase, this will inherantly work for all lowercase users
           args: >
-            -Dsonar.organization=${{ steps.metadata.outputs.owner }}
+            -Dsonar.organization=$owner
             -Dsonar.projectKey=${{ github.repository_owner }}_${{ github.event.repository.name }}
             -Dsonar.sources=.
