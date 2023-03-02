@@ -22,7 +22,7 @@ jobs:
       - name: Source Metadata
         id: metadata
         run: |
-          echo "::set-output name=OWNER::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
+          echo "project_owner=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Sonar Scan
         uses: sonarsource/sonarcloud-github-action@master
@@ -32,6 +32,6 @@ jobs:
         with:
           # Case sensitivity requires OWNER to be passed as lowercase, this will inherantly work for all lowercase users
           args: >
-            -Dsonar.organization=${{ steps.metadata.outputs.OWNER }}
+            -Dsonar.organization=${{ env.project_owner }}
             -Dsonar.projectKey=${{ github.repository_owner }}_${{ github.event.repository.name }}
             -Dsonar.sources=.
