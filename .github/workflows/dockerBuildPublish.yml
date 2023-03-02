@@ -33,9 +33,9 @@ jobs:
         id: metadata
         run: |
           source metadata/version.sh
-          echo "name=${PROJECT_NAME}" >> $GITHUB_ENV
+          echo "project_name=${PROJECT_NAME}" >> $GITHUB_ENV
           echo "version=${FUTURE_VERSION}" >> $GITHUB_ENV
-          echo "owner=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+          echo "project_owner=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -50,5 +50,5 @@ jobs:
           file: ${{ inputs.dockerfilePath }}
           push: ${{ contains(github.ref, 'refs/heads/main') }}
           tags: |
-            ${{ steps.metadata.outputs.owner }}/${{ steps.metadata.outputs.name }}:latest
-            ${{ steps.metadata.outputs.owner }}/${{ steps.metadata.outputs.name }}:${{ steps.metadata.outputs.version }}
+            ${{ env.project_owner }}/${{ env.project_name }}:latest
+            ${{ env.project_owner }}/${{ env.project_name }}:${{ env.version }}

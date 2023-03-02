@@ -25,8 +25,8 @@ jobs:
       - name: Source metadata
         id: metadata
         run: |
-          echo "name=${PROJECT_NAME}" >> $GITHUB_ENV
-          echo "owner=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+          echo "project_name=${PROJECT_NAME}" >> $GITHUB_ENV
+          echo "project_owner=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Set up Python 3.
         uses: actions/setup-python@v3
@@ -39,5 +39,5 @@ jobs:
       - name: Trigger a new import on Galaxy.
         run: |
           if [ $GITHUB_REF_NAME = main ]; then
-            ansible-galaxy role import --api-key ${{ secrets.GALAXY_TOKEN }} ${{ steps.metadata.outputs.owner }} ${{ steps.metadata.outputs.name }}
+            ansible-galaxy role import --api-key ${{ secrets.GALAXY_TOKEN }} ${{ env.project_owner }} ${{ env.project_name }}
           fi
