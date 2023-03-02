@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.6.3] - (02-03-2023)
+fix: (6731b36) Resolve set-output deprecation (#27)
+
 ## [0.6.2] - (24-02-2023)
 fix: (ed9d04c) Groovy Lint fail on (#26)
 
