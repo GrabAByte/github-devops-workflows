@@ -25,6 +25,7 @@ jobs:
       - name: Source metadata
         id: metadata
         run: |
+          source metadata/version.sh
           echo "project_name=${PROJECT_NAME}" >> $GITHUB_ENV
           echo "project_owner=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
