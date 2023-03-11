@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.6.4] - (11-03-2023)
+fix: (74287a8) source metadata in ansible Release job
+
 ## [0.6.3] - (02-03-2023)
 fix: (6731b36) Resolve set-output deprecation (#27)
 
