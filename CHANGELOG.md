@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.7.0] - (29-05-2024)
+feat: (ac3b1a8) Add Helm CI (#28)
+
 ## [0.6.4] - (11-03-2023)
 fix: (74287a8) source metadata in ansible Release job
 
