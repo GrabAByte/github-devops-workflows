@@ -29,3 +29,10 @@ jobs:
             --values ${{ inputs.valuesPath }} \
             --output-dir ./helm \
             ${{ inputs.chartPath }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "helm-${{ inputs.chartPath }}"
+          path: helm
+          retention-days: 1
