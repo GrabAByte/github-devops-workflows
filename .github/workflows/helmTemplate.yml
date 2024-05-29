@@ -30,9 +30,12 @@ jobs:
             --output-dir ./helm \
             ${{ inputs.chartPath }}
 
+      - name: Set Artifact Name
+        run: |
+          echo "artifact=$(find charts -type d -name ${{ inputs.chartName }}" >> $GITHUB_ENV
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "helm-${{ inputs.chartPath }}"
+          name: ${{ env.artifact }}-${{ github.sha }}
           path: helm
           retention-days: 1
