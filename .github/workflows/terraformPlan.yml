@@ -17,8 +17,8 @@ jobs:
 
       - name: Initialize Terraform
         run: |
-          terraform --chdir=environments/${{ inputs.terraformPath }} init
+          terraform -chdir=environments/${{ inputs.terraformPath }} init
 
       - name: Plan Terraform
         run: |
-          terraform --chdir=environments/${{ inputs.terraformPath }} plan
+          terraform -chdir=environments/${{ inputs.terraformPath }} plan
