@@ -9,6 +9,10 @@ name: Helm Templating
       releaseName:
         required: true
         type: string
+      valuesPath:
+        required: true
+        type: string
+        default: "charts/${{ inputs.chartPath }}/values.yaml"
 
 jobs:
   template:
