@@ -17,4 +17,4 @@ jobs:
 
       - name: Lint Terraform
         run: |
-          tflint --chdir=environments/${{ inputs.terraformPath }}
+          docker run --rm -v $(pwd)/environments/${{ inputs.terraformPath }}:/data -t ghcr.io/terraform-linters/tflint
