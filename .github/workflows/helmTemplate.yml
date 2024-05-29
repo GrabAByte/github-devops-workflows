@@ -24,4 +24,4 @@ jobs:
             --name-template=${{ inputs.releaseName }} \
             --values ${{ inputs.valuesPath }} \
             --output-dir ./helm \
-            ${{ inputs.chartPath }} && \
+            ${{ inputs.chartPath }}
