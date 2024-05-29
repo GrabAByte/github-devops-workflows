@@ -1,0 +1,33 @@
+---
+name: Helm Release
+'on':
+  workflow_call:
+    inputs:
+      chartPath:
+        required: true
+        type: string
+      releaseName:
+        required: true
+        type: string
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v3
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Release to GitHub
+        uses: ./.github/actions/helm-index
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        with:
+          repository-name: "${{ github.event.repository.name }}"
+          package-path: helm
+          release-name: "${{ github.event.inputs.version }}"

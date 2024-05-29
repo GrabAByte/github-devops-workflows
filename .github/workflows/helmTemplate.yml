@@ -1,0 +1,27 @@
+---
+name: Helm Templating
+'on':
+  workflow_call:
+    inputs:
+      chartPath:
+        required: true
+        type: string
+      releaseName:
+        required: true
+        type: string
+
+jobs:
+  template:
+    name: Template
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v3
+
+      - name: Template Charts
+        run: |
+          helm template \
+            --name-template=${{ inputs.releaseName }} \
+            --values ${{ inputs.valuesPath }} \
+            --output-dir ./helm \
+            ${{ inputs.chartPath }} && \
