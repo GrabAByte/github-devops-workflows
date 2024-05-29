@@ -2,13 +2,6 @@
 name: Helm Release
 'on':
   workflow_call:
-    inputs:
-      chartPath:
-        required: true
-        type: string
-      releaseName:
-        required: true
-        type: string
 
 jobs:
   release:
