@@ -1,0 +1,41 @@
+---
+name: Helm Templating
+'on':
+  workflow_call:
+    inputs:
+      chartPath:
+        required: true
+        type: string
+      releaseName:
+        required: true
+        type: string
+      valuesPath:
+        required: true
+        type: string
+
+jobs:
+  template:
+    name: Template
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v3
+
+      - name: Template Charts
+        run: |
+          helm template \
+            --name-template=${{ inputs.releaseName }} \
+            --values ${{ inputs.valuesPath }} \
+            --output-dir ./helm \
+            ${{ inputs.chartPath }}
+
+      - name: Set Artifact Name
+        run: |
+          echo "artifact=$(find helm/ -type f | xargs cat | grep '  name:' | cut -d ':' -f 2 | tr -d ' ')" >> $GITHUB_ENV
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.artifact }}-${{ github.sha }}
+          path: helm
+          retention-days: 1
