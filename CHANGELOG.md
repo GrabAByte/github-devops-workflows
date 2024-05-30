@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.8.0] - (30-05-2024)
+feat: (5d47a14) Add terraform workflows (#29)
+
 ## [0.7.0] - (29-05-2024)
 feat: (ac3b1a8) Add Helm CI (#28)
 
