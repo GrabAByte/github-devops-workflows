@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.9.0] - (02-06-2024)
+feat: (f6fdc55) Add terraform validate job (#30)
+
 ## [0.8.0] - (30-05-2024)
 feat: (5d47a14) Add terraform workflows (#29)
 
