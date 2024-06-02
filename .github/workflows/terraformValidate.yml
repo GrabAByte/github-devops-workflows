@@ -21,4 +21,5 @@ jobs:
 
       - name: Validate Terraform
         run: |
+          cd ${{ inputs.terraformPath }} && \
           terraform validate ${{ inputs.terraformPath }}
