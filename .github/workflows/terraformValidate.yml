@@ -1,5 +1,5 @@
 ---
-name: Terraform Linter
+name: Terraform Validator
 'on':
   workflow_call:
     inputs:
@@ -8,13 +8,15 @@ name: Terraform Linter
         type: string
 
 jobs:
-  lint:
-    name: Lint
+  validate:
+    name: Validate
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v4
 
-      - name: Lint Terraform
+      - name: Validate Terraform
         run: |
-          docker run --rm -v $(pwd)/${{ inputs.terraformPath }}:/data -t ghcr.io/terraform-linters/tflint
+          cd ./${{ inputs.terraformPath }} && \
+          terraform init && \
+          terraform validate
