@@ -23,9 +23,8 @@ jobs:
         run: |
           cd ${{ inputs.terraformPath }} && \
           echo '[default]' > .aws_credentials
-          echo 'aws_access_key_id=$AWS_ACCESS_KEY_ID' >> .aws_credentials
-          echo 'aws_secret_access_key=$AWS_SECRET_ACCESS_KEY' >> .aws_credentials
-          echo 'region=$AWS_PROFILE' >> .aws_credentials
-          cat .aws_credentials
+          echo 'AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID"' >> .aws_credentials
+          echo 'AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY"' >> .aws_credentials
+          echo 'region="$AWS_PROFILE"' >> .aws_credentials
           terraform init && \
           terraform plan || :
