@@ -24,16 +24,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download file
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v5
         with:
           name: version.sh
           path: metadata
 
       - name: Login to DockerHub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -47,7 +47,7 @@ jobs:
           echo "project_owner=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Docker Build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ${{ inputs.dockerfilePath }}
