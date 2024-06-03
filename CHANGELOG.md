@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.9.1] - (03-06-2024)
+fix: (4784264) Bump all github actions to their latest major release version (#32)
+
 ## [0.9.0] - (02-06-2024)
 feat: (f6fdc55) Add terraform validate job (#30)
 
