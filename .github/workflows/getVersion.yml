@@ -78,7 +78,7 @@ jobs:
           echo "export GIT_COMMIT_MESSAGE=\"${FINAL_COMMIT_MESSAGE}\"" >> metadata/version.sh
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: version.sh
           path: metadata
