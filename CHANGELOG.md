@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.9.2] - (11-09-2024)
+fix: (642fe84) Add MIT License (#33)
+
 ## [0.9.1] - (03-06-2024)
 fix: (4784264) Bump all github actions to their latest major release version (#32)
 
