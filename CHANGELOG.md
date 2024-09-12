@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.9.3] - (12-09-2024)
+fix: (58d1cd0) Compatibility issues for upload and download release actions
+
 ## [0.9.2] - (11-09-2024)
 fix: (642fe84) Add MIT License (#33)
 
