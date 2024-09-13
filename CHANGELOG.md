@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.9.4] - (13-09-2024)
+fix: (ee14dc9) terraform workflow directory structure for workspaces (#35)
+
 ## [0.9.3] - (12-09-2024)
 fix: (58d1cd0) Compatibility issues for upload and download release actions
 
