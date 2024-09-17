@@ -40,7 +40,6 @@ jobs:
 
       - name: Trigger a new import on Galaxy.
         run: |
-          echo "ansible-galaxy role import --api-key ${{ secrets.GALAXY_TOKEN }} --role-name ${{ env.role_name }} ${{ env.project_owner }} ${{ env.project_name }}"
           if [ $GITHUB_REF_NAME = main ]; then
             ansible-galaxy role import --api-key ${{ secrets.GALAXY_TOKEN }} --role-name ${{ env.role_name}} ${{ env.project_owner }} ${{ env.project_name }}
           fi
