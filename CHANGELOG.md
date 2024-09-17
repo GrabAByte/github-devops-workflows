@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.9.5] - (17-09-2024)
+fix: (e936d6e) ansible-galaxy to use --role-name flag (#36)
+
 ## [0.9.4] - (13-09-2024)
 fix: (ee14dc9) terraform workflow directory structure for workspaces (#35)
 
