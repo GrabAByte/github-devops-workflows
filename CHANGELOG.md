@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.10.0] - (23-04-2025)
+feat: (61a2226) bump helm releaser to version 1.7.0 (#37)
+
 ## [0.9.5] - (17-09-2024)
 fix: (e936d6e) ansible-galaxy to use --role-name flag (#36)
 
