@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.11.0] - (16-05-2025)
+feat: (ef660b2) add terraform plan and apply functionality (#38)
+
 ## [0.10.0] - (23-04-2025)
 feat: (61a2226) bump helm releaser to version 1.7.0 (#37)
 
