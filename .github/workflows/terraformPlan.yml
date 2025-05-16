@@ -10,6 +10,11 @@ name: Terraform Plan
         required: true
         type: string
 
+env:
+  permissions:
+    id-token: write # This is required for requesting the JWT
+    contents: read
+
 jobs:
   plan:
     name: Plan
