@@ -30,4 +30,4 @@ jobs:
           terraform init -backend-config=backends/${{ inputs.workspace }} && \
           terraform workspace new ${{ inputs.workspace }} && \
           terraform workspace select ${{ inputs.workspace }} && \
-          terraform apply
+          terraform apply --auto-approve
