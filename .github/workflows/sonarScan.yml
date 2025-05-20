@@ -30,7 +30,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          # Case sensitivity requires OWNER to be passed as lowercase, this will inherantly work for all lowercase users
           args: >
             -Dsonar.organization=${{ env.project_owner }}
             -Dsonar.projectKey=${{ github.repository_owner }}_${{ github.event.repository.name }}
