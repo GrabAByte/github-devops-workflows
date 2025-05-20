@@ -17,4 +17,4 @@ jobs:
 
       - name: Scan Terraform
         run: |
-          docker run --rm -it -v $(pwd)/${{ inputs.terraformPath }}:/src aquasec/tfsec /src || :
+          docker run --rm -v $(pwd)/${{ inputs.terraformPath }}:/src aquasec/tfsec /src || :
