@@ -1,0 +1,41 @@
+---
+name: Terraform Destroy
+'on':
+  workflow_call:
+    inputs:
+      workspace:
+        required: true
+        type: string
+      terraformPath:
+        required: true
+        type: string
+      region:
+        required: true
+        type: string
+    secrets:
+      account:
+        required: true
+      role:
+        required: true
+
+jobs:
+  destroy:
+    name: Destroy
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.account }}:role/${{ secrets.role }}
+          aws-region: ${{ inputs.region }}
+
+      - name: Destroy Terraform
+        run: |
+          cd ${{ inputs.terraformPath }} && \
+          terraform init -backend-config=backends/${{ inputs.workspace }} && \
+          terraform workspace new ${{ inputs.workspace }} && \
+          terraform workspace select ${{ inputs.workspace }} && \
+          terraform destroy --auto-approve
