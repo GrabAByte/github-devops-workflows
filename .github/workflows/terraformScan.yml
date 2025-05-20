@@ -1,5 +1,5 @@
 ---
-name: Terraform Linter
+name: Terraform Security Scanner
 'on':
   workflow_call:
     inputs:
@@ -8,13 +8,13 @@ name: Terraform Linter
         type: string
 
 jobs:
-  lint:
-    name: Lint
+  scan:
+    name: Scan
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v4
 
-      - name: Lint Terraform
+      - name: Scan Terraform
         run: |
           tfsec ${{ inputs.terraformPath }}
