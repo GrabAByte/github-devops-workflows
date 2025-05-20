@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.12.1] - (20-05-2025)
+fix: (327c193) remove erroneous secret attributes (#40)
+
 ## [0.12.0] - (20-05-2025)
 feat: (7d38bad) add terraform sec and secret implementation (#39)
 
