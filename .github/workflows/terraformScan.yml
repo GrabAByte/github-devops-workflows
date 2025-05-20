@@ -1,0 +1,20 @@
+---
+name: Terraform Security Scanner
+'on':
+  workflow_call:
+    inputs:
+      terraformPath:
+        required: true
+        type: string
+
+jobs:
+  scan:
+    name: Scan
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v4
+
+      - name: Scan Terraform
+        run: |
+          docker run --rm -v $(pwd)/${{ inputs.terraformPath }}:/src aquasec/tfsec /src || :
