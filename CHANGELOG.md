@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.12.0] - (20-05-2025)
+feat: (7d38bad) add terraform sec and secret implementation (#39)
+
 ## [0.11.0] - (16-05-2025)
 feat: (ef660b2) add terraform plan and apply functionality (#38)
 
