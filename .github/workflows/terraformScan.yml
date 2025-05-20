@@ -15,11 +15,6 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v4
 
-      - name: Install tfsec
-        run: |
-          curl -L "$(curl -s https://api.github.com/repos/tfsec/tfsec/releases/latest | grep -o -E "https://.+tfsec-linux-amd64")" -o tfsec && \
-          chmod +x tfsec
-
       - name: Scan Terraform
         run: |
-          ./tfsec ${{ inputs.terraformPath }}
+          docker run --rm -it -v "${{ terraformPath }}):/src" aquasec/tfsec /src
