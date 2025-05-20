@@ -6,7 +6,16 @@ name: Terraform Apply
       workspace:
         required: true
         type: string
-      whitepaper:
+      terraformPath:
+        required: true
+        type: string
+      account:
+        required: true
+        type: string
+      region:
+        required: true
+        type: string
+      role:
         required: true
         type: string
 
@@ -21,12 +30,12 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::056586966152:role/grababyte
-          aws-region: eu-west-1
+          role-to-assume: arn:aws:iam::${{ inputs.account }}:role/${{ inputs.role }}
+          aws-region: ${{ inputs.region }}
 
       - name: Apply Terraform
         run: |
-          cd whitepapers/${{ inputs.whitepaper }} && \
+          cd ${{ inputs.terraformPath }} && \
           terraform init -backend-config=backends/${{ inputs.workspace }} && \
           terraform workspace new ${{ inputs.workspace }} && \
           terraform workspace select ${{ inputs.workspace }} && \
