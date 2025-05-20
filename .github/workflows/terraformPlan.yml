@@ -15,10 +15,8 @@ name: Terraform Plan
     secrets:
       account:
         required: true
-        type: string
       role:
         required: true
-        type: string
 
 jobs:
   plan:
