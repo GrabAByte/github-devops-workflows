@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.13.2] - (23-05-2025)
+fix: (1aea468) add file extension to backends
+
 ## [0.13.1] - (23-05-2025)
 fix: (7c3e9af) add credentials to terraform validate to use remote backend
 
