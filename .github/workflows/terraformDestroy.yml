@@ -36,6 +36,6 @@ jobs:
         run: |
           cd ${{ inputs.terraformPath }} && \
           terraform init -backend-config=backends/${{ inputs.workspace }}.tf && \
-          terraform workspace new ${{ inputs.workspace }} && \
+          terraform workspace new ${{ inputs.workspace }} || \
           terraform workspace select ${{ inputs.workspace }} && \
           terraform destroy --auto-approve
