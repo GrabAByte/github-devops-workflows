@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.13.1] - (23-05-2025)
+fix: (7c3e9af) add credentials to terraform validate to use remote backend
+
 ## [0.13.0] - (21-05-2025)
 feat: (aa04ffb) Add terraform destory job to remove remnant services in personal AWS account (#41)
 
