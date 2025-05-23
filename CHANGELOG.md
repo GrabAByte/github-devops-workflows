@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.14.0] - (23-05-2025)
+feat: (4b92d26) add semantic release (#45)
+
 ## [0.13.3] - (23-05-2025)
 fix: (e4e3386) move into terraform workspace if already exists #44
 
