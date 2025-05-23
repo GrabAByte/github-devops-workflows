@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.13.3] - (23-05-2025)
+fix: (e4e3386) move into terraform workspace if already exists #44
+
 ## [0.13.2] - (23-05-2025)
 fix: (1aea468) add file extension to backends
 
