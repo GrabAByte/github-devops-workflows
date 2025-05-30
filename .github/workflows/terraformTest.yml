@@ -36,4 +36,4 @@ jobs:
         run: |
           cd ./${{ inputs.terraformPath }} && \
           terraform init && \
-          terraform test ${{ inputs.varFile }}
+          terraform test -var-file ${{ inputs.varFile }}
