@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.15.0] - (30-05-2025)
+feat: (452128f) add terraform test (#46)
+
 ## [0.14.0] - (23-05-2025)
 feat: (4b92d26) add semantic release (#45)
 
