@@ -35,5 +35,6 @@ jobs:
       - name: Validate Terraform
         run: |
           cd ./${{ inputs.terraformPath }} && \
+          find . -type f && \
           terraform init && \
           terraform test -var-file ${{ inputs.varFile }}
