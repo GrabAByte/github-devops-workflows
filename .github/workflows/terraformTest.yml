@@ -32,7 +32,7 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.account }}:role/${{ secrets.role }}
           aws-region: ${{ inputs.region }}
 
-      - name: Validate Terraform
+      - name: Test Terraform
         run: |
           cd ./${{ inputs.terraformPath }} && \
           terraform init && \
