@@ -9,6 +9,9 @@ name: Terraform Test
       terraformPath:
         required: true
         type: string
+      varFile:
+        required: true
+        type: string
     secrets:
       account:
         required: true
@@ -33,4 +36,4 @@ jobs:
         run: |
           cd ./${{ inputs.terraformPath }} && \
           terraform init && \
-          terraform test
+          terraform test ${{ inputs.varFile }}
