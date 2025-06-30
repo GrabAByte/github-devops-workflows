@@ -11,7 +11,6 @@ jobs:
     uses: ./.github/workflows/yamlLint.yml
     with:
       yamlPath: '.github'
-    needs: get-version
   sonar-scan:
     uses: ./.github/workflows/sonarScan.yml
     secrets:
