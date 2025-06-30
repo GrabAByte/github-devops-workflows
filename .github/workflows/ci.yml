@@ -7,11 +7,6 @@ name: CI
       - main
 
 jobs:
-  get-version:
-    uses: ./.github/workflows/getVersion.yml
-    with:
-      metadataFile: 'metadata.json'
-      metadataPath: .
   yaml-lint:
     uses: ./.github/workflows/yamlLint.yml
     with:
@@ -23,11 +18,6 @@ jobs:
       WORKFLOW_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     needs: get-version
-  update-version:
-    uses: ./.github/workflows/updateVersion.yml
-    with:
-      gitUsername: 'grababyte'
-      gitEmail: 'grababyte@github.com'
-      metadataFile: 'metadata.json'
-      metadataPath: .
+  semantic-release:
+    uses: GrabAByte/github-devops-workflows/.github/workflows/semanticRelease.yml@0.14.0
     needs: [yaml-lint, sonar-scan]
