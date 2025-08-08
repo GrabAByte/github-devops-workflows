@@ -9,6 +9,9 @@ name: Terraform Plan
       terraformPath:
         required: true
         type: string
+      terraformVars:
+        required: true
+        type: string
       region:
         required: true
         type: string
@@ -38,4 +41,4 @@ jobs:
           terraform init -backend-config=backends/${{ inputs.workspace }}.tf && \
           terraform workspace new ${{ inputs.workspace }} || \
           terraform workspace select ${{ inputs.workspace }} && \
-          terraform plan
+          terraform plan -var-file ${{ inputs.terraformVars }}
