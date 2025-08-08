@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/GrabAByte/github-devops-workflows/compare/v1.0.0...v1.1.0) (2025-08-08)
+
+
+### Features
+
+* add tfvars file input to terraform workflows ([#48](https://github.com/GrabAByte/github-devops-workflows/issues/48)) ([ce139c5](https://github.com/GrabAByte/github-devops-workflows/commit/ce139c5ff05c4bec179d151ff8a4cc5872fc9d07))
+
 # 1.0.0 (2025-06-30)
 
 
