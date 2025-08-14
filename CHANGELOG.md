@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/GrabAByte/github-devops-workflows/compare/v1.1.0...v1.2.0) (2025-08-14)
+
+
+### Features
+
+* remove tf backends ([#49](https://github.com/GrabAByte/github-devops-workflows/issues/49)) ([7ce017d](https://github.com/GrabAByte/github-devops-workflows/commit/7ce017dd0b1d981be13a594a1d43519c6d11932c))
+
 # [1.1.0](https://github.com/GrabAByte/github-devops-workflows/compare/v1.0.0...v1.1.0) (2025-08-08)
 
 
