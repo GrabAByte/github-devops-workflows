@@ -38,7 +38,7 @@ jobs:
       - name: Apply Terraform
         run: |
           cd ${{ inputs.terraformPath }} && \
-          terraform init -backend-config=backends/${{ inputs.workspace }}.tf && \
+          terraform init && \
           terraform workspace new ${{ inputs.workspace }} || \
           terraform workspace select ${{ inputs.workspace }} && \
           terraform apply --auto-approve -var-file ${{ inputs.terraformVars }}
