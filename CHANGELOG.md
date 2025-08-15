@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/GrabAByte/github-devops-workflows/compare/v1.2.0...v1.3.0) (2025-08-15)
+
+
+### Features
+
+* add ability to control releases through route-to-live using environments ([e3d3ff4](https://github.com/GrabAByte/github-devops-workflows/commit/e3d3ff43a25b7edaaf990d26e70e1b080a1d3f32))
+
 # [1.2.0](https://github.com/GrabAByte/github-devops-workflows/compare/v1.1.0...v1.2.0) (2025-08-14)
 
 
