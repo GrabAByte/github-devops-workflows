@@ -24,6 +24,7 @@ name: Terraform Destroy
 jobs:
   destroy:
     name: Destroy
+    environment: ${{ inputs.workspace }}
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the codebase.
